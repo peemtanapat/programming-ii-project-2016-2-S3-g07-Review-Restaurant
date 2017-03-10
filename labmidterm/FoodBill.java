@@ -9,20 +9,22 @@ package labmidterm;
  *
  * @author USER
  */
-public class FoodBill extends GoodsBill {
-
+public class FoodBill extends Bill {
+    private static long count=0;
+     
     public FoodBill(Customer cust,double price) {
-        this.cust = cust;
-        this.price = price;
+        super(cust,price);
+        billId++;
         count++;
     }
+    
     
     public long getNumOfBill() {
         return count;
     }
     
     public String toString() {
-        return "Food Bill, Bill id: "+count+" Customer id: "+custId+"\nTotal Price = "+getTotalPrice+", Promotion Price="+promoPrice+"\nNet : "+(getTotalprice-promoPrice);
+        return "Food Bill, Bill id: " + billId + getCust() + "\n" + getTotalPrice() + ", Promotion Price=" + getPromoPrice() + "\nNet : " + (getTotalPrice() - getPromoPrice());
     }
 }
 
