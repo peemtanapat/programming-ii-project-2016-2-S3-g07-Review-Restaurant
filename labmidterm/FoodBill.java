@@ -14,8 +14,8 @@ public class FoodBill extends Bill {
      
     public FoodBill(Customer cust,double price) {
         super(cust,price);
-        billId++;
         count++;
+        this.billId = count;
     }
     
     
@@ -24,7 +24,7 @@ public class FoodBill extends Bill {
     }
     
     public String toString() {
-        return "Food Bill, Bill id: " + billId + getCust() + "\n" + getTotalPrice() + ", Promotion Price=" + getPromoPrice() + "\nNet : " + (getTotalPrice() - getPromoPrice());
+        return "Food Bill,Bill id: " + billId + " "+getCust() + "\nTotal Price = " + getTotalPrice() + ", Promotion Price=" + getPromoPrice() + "\nNet : " + (getTotalPrice() - getPromoPrice());
     }
 }
 

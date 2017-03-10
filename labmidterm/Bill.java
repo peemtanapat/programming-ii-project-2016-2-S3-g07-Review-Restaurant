@@ -10,6 +10,7 @@ public abstract class Bill {
     public Bill(Customer cust, double totalPrice) {
         this.cust = cust;
         this.totalPrice = totalPrice;
+       
     }
 
     public Customer getCust() {
@@ -33,7 +34,17 @@ public abstract class Bill {
     }
 
     public void setPromoPrice(Bill bill, double minPrice, double percentPro, double maxPro) {
-        this.promoPrice = ((this.totalPrice*percentPro)/100)-maxPro;
+        if(totalPrice>=minPrice){
+            this.promoPrice = (this.totalPrice*percentPro)/100;
+            if(promoPrice>200){
+                this.promoPrice =200;
+            }else{
+                this.promoPrice = (this.totalPrice*percentPro)/100;
+            }
+        }else{
+            this.promoPrice=0;
+        }   
+        
     }
 
     @Override
