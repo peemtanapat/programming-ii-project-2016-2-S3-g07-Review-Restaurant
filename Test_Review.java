@@ -32,7 +32,7 @@ public class Test_Review {
         Score score = new Score(taste, clean, service, look, value);
         System.out.print("Review write here: ");
         String content = sc.nextLine();
-        Review r1 = new Review(user, store[storeNum], score, content);\\55555
+        Review r1 = new Review(user, store[storeNum], score, content);
         System.out.println(r1);
     }
 }
