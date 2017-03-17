@@ -1,4 +1,4 @@
-package Project_Review;
+package projectjava;
 
 import java.util.Scanner;
 
@@ -32,7 +32,11 @@ public class Test_Review {
         Score score = new Score(taste, clean, service, look, value);
         System.out.print("Review write here: ");
         String content = sc.nextLine();
+        System.out.print("You want to delete comment YES/NO : ");
+        String delete = sc.nextLine();
         Review r1 = new Review(user, store[storeNum], score, content);
+        System.out.println(r1);
+        r1.setDelete(delete);
         System.out.println(r1);
     }
 }

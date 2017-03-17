@@ -1,4 +1,4 @@
-package Project_Review;
+package projectjava;
 
 public class Review {
 
@@ -18,6 +18,23 @@ public class Review {
         this.content = content;
         count++;
     }
+    public void setDelete(String delete){
+
+        if(delete.equalsIgnoreCase("YES")){
+            this.content = null;
+        }else if(delete.equalsIgnoreCase("NO")){
+            this.content = content;
+        }else
+            this.content = "Please select YES / No";
+        
+        
+    }
+    
+    
+    public void setContent(String content) {
+        this.content = content;
+    }
+    
 
     public static int getCount() {
         return count;
