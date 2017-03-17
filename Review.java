@@ -35,7 +35,10 @@ public class Review {
         this.content = content;
     }
     
-
+    public void setStoreName(Store store) {
+        this.store = store;
+    }
+    
     public static int getCount() {
         return count;
     }
