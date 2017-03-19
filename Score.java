@@ -12,15 +12,24 @@ public class Score{
     }
 
     public Score(double taste, double clean, double service, double look, double value) {
-        this.taste = taste;
-        this.clean = clean;
-        this.service = service;
-        this.look = look;
-        this.value = value;
+        double max = 5.0, min = 0.0;
+        if (taste > max || clean > max || service > max || look > max || value > max || taste < min || clean < min || service < min || look < min || value < min) {
+        
+            try {
+                int a = 1 / 0;
+            } catch (ArithmeticException e) {
+                System.out.println("Warning! : Score range is 0 to 5...");
+            }
+        } else {
+            this.taste = taste;
+            this.clean = clean;
+            this.service = service;
+            this.look = look;
+            this.value = value;
+        }
     }
 
-  
-
+ 
     public double getAvg() {
         return (taste + clean + service + look + value) / 5;
     }
