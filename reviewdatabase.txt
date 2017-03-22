@@ -1,0 +1,59 @@
+create table Users(
+    UserID varchar (20),
+    password varchar (30),
+    firstName varchar(20),
+    lastName varchar(50),
+    age numeric (2),
+    sex char (1),
+    address varchar(100),
+    CommentID numeric(10),
+    ReviewID numeric(10),
+    Primary Key(UserID)
+);
+create table Comments(
+    CommentID numeric (10),
+    ContentComm varchar (2000),
+    UserID varchar (20),
+    ReviewID numeric(10),
+    Primary Key (CommentID),
+    Foreign Key (UserID) References Users(UserID),
+    Foreign Key (ReviewID) References Reviews(ReviewID)
+);
+
+create table Restaurants(
+    ResID numeric (6),
+    resName varchar (50),
+    resAdd varchar(100),
+    subDistrict varchar(50),
+    district varchar(50),
+    province varchar(30),
+    postCode numeric(5),
+    resTel varchar(50),
+    email varchar(100),
+    Primary key (ResID)
+);
+
+create table Imgs(
+    imgID numeric (10),
+    imgUrl varchar (200),    
+    ReviewID numeric (10),
+    Primary Key (imgID),
+    Foreign Key (ReviewID) References Reviews(ReviewID)
+);
+
+create table Reviews(
+    ReviewID numeric (10),
+    topicReview varchar(100),
+    contentReview varchar (500),
+    taste numeric (1),
+    clean numeric (1),
+    service numeric (1),
+    look numeric (1),
+    worth numeric (1),
+    reviewDate date ,
+    UserID varchar (20),
+    ResID numeric (6),
+    Primary Key (ReviewID),
+    Foreign Key (UserID) References User6s(UserID),
+    Foreign Key (ResID) References Restaurants(ResID)
+);
