@@ -1,4 +1,4 @@
-package Project_Review;
+package projectjava;
 
 import java.util.Scanner;
 
@@ -18,21 +18,25 @@ public class Test_Review {
         System.out.print("Choose the store to review" + "(0-" + (store.length - 1) + "): ");
         int storeNum = sc.nextInt();
         System.out.println("-----Score------");
-        System.out.print("1.Taste: ");
+	System.out.print("1.Taste(0-5): ");
         int taste = sc.nextInt();
-        System.out.print("2.Cleanness: ");
+        System.out.print("2.Cleanness(0-5): ");
         int clean = sc.nextInt();
-        System.out.print("3.Service: ");
+        System.out.print("3.Service(0-5): ");
         int service = sc.nextInt();
-        System.out.print("4.Look: ");
+        System.out.print("4.Look(0-5): ");
         int look = sc.nextInt();
-        System.out.print("5.Value: ");
-        int value = sc.nextInt();
+        System.out.print("5.Value(0-5): ");
+        int worth = sc.nextInt();
         sc.nextLine();
-        Score score = new Score(taste, clean, service, look, value);
+        Score score = new Score(taste, clean, service, look, worth);
         System.out.print("Review write here: ");
         String content = sc.nextLine();
+//        System.out.print("You want to delete comment YES/NO : ");
+//        String delete = sc.nextLine();
         Review r1 = new Review(user, store[storeNum], score, content);
         System.out.println(r1);
+//        r1.setDelete(delete);
+//        System.out.println(r1);
     }
 }

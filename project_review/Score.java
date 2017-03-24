@@ -1,4 +1,4 @@
-package Project_Review;
+package projectjava;
 
 public class Score{
 
@@ -6,23 +6,33 @@ public class Score{
     private double clean;
     private double service;
     private double look;
-    private double value;
+    private double worth;
 
     public Score() {
     }
 
-    public Score(double taste, double clean, double service, double look, double value) {
-        this.taste = taste;
-        this.clean = clean;
-        this.service = service;
-        this.look = look;
-        this.value = value;
+    public Score(double taste, double clean, double service, double look, double worth) {
+        double max = 5.0, min = 0.0;
+        if (taste > max || clean > max || service > max || look > max || worth > max 
+           || taste < min || clean < min || service < min || look < min || worth < min) {
+        
+            try {
+                int a = 1 / 0;
+            } catch (ArithmeticException e) {
+                System.out.println("Warning! : Score range is 0 to 5...");
+            }
+        } else {
+            this.taste = taste;
+            this.clean = clean;
+            this.service = service;
+            this.look = look;
+            this.worth = worth;
+        }
     }
 
-  
-
+ 
     public double getAvg() {
-        return (taste + clean + service + look + value) / 5;
+        return (taste + clean + service + look + worth) / 5;
     }
 
     @Override
@@ -33,7 +43,7 @@ public class Score{
                 + "ความสะอาด:" + clean + " | "
                 + "การบริการ:" + service + " | "
                 + "บรรยากาศร้าน:" + look + " | "
-                + "ความคุ้มค่า: " + value + " | "
+                + "ความคุ้มค่า: " + worth + " | "
                 + "คะแนนเฉลี่ย: " + getAvg()
                 + "\n                อยู่ในเกณฑ์..." + par();
         return result;

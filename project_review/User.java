@@ -1,4 +1,4 @@
-package Project_Review;
+package projectjava;
 
 public class User {
 
@@ -10,6 +10,6 @@ public class User {
     }
 
     public String toString() {
-        return "Review by: " + userName;
+        return "By: " + userName;
     }
 }
