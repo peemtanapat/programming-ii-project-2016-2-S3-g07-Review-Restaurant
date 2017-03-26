@@ -1,4 +1,4 @@
-package project_review;
+package Project_Review;
 
 public class Score{
 
@@ -6,72 +6,23 @@ public class Score{
     private double clean;
     private double service;
     private double look;
-    private double worth;
+    private double value;
 
     public Score() {
     }
-            
-    public Score(double taste, double clean, double service, double look, double worth) {
-        double max = 5.0, min = 0.0;
-        if (taste > max || clean > max || service > max || look > max || worth > max 
-           || taste < min || clean < min || service < min || look < min || worth < min) {
-        
-            try {
-                int a = 1 / 0;
-            } catch (ArithmeticException e) {
-                System.out.println("Warning! : Score range is 0 to 5...");
-            }
-        } else {
-            this.taste = taste;
-            this.clean = clean;
-            this.service = service;
-            this.look = look;
-            this.worth = worth;
-        }
-    }
 
-    public double getTaste() {
-        return taste;
-    }
-
-    public void setTaste(double taste) {
+    public Score(double taste, double clean, double service, double look, double value) {
         this.taste = taste;
-    }
-
-    public double getClean() {
-        return clean;
-    }
-
-    public void setClean(double clean) {
         this.clean = clean;
-    }
-
-    public double getService() {
-        return service;
-    }
-
-    public void setService(double service) {
         this.service = service;
-    }
-
-    public double getLook() {
-        return look;
-    }
-
-    public void setLook(double look) {
         this.look = look;
+        this.value = value;
     }
 
-    public double getWorth() {
-        return worth;
-    }
-
-    public void setWorth(double worth) {
-        this.worth = worth;
-    }
+  
 
     public double getAvg() {
-        return (taste + clean + service + look + worth) / 5;
+        return (taste + clean + service + look + value) / 5;
     }
 
     @Override
@@ -82,7 +33,7 @@ public class Score{
                 + "ความสะอาด:" + clean + " | "
                 + "การบริการ:" + service + " | "
                 + "บรรยากาศร้าน:" + look + " | "
-                + "ความคุ้มค่า: " + worth + " | "
+                + "ความคุ้มค่า: " + value + " | "
                 + "คะแนนเฉลี่ย: " + getAvg()
                 + "\n                อยู่ในเกณฑ์..." + par();
         return result;

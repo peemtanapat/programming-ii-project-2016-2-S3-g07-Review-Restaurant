@@ -1,50 +1,122 @@
-package projectjava;
+package project_review;
 
-public class Review implements Comparable {
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
+public class Review extends Score implements Comparable {
+
+    private int reviewId;
+    private String topicReview;
     private User user;
-    private Store store;
+    private Restaurant restaurant;
     private Score score;
-    private String content;
+    private String contentReview;
     private static int count;
     private static String orderBy = "name";
 
     public Review() {
     }
-    
-    public Review(User user, Store store, Score score, String content) {
+
+    public Review(User user, Restaurant store, Score score, String contentReview) {
         this.user = user;
-        this.store = store;
+        this.restaurant = store;
         this.score = score;
-        this.content = content;
+        this.contentReview = contentReview;
         count++;
     }
+  private static Review orm(Review r, ResultSet rs) throws SQLException {
+        //--------------Reviews table-----------------
+        r.setReviewId(rs.getInt("res_id"));
+        r.setTopicReview(rs.getString("topicReview"));
+        r.setContentReview (rs.getString("contentReview "));
+        r.setTaste(rs.getDouble("taste"));
+        r.setClean(rs.getDouble("clean"));
+        r.setService(rs.getDouble("service"));
+        r.setLook(rs.getDouble("look"));
+        r.setWorth(rs.getDouble("worth"));
+        return r;
+    }
+    public int getReviewId() {
+        return reviewId;
+    }
+
+    public void setReviewId(int reviewId) {
+        this.reviewId = reviewId;
+    }
+
+    public String getTopicReview() {
+        return topicReview;
+    }
+
+    public void setTopicReview(String topicReview) {
+        this.topicReview = topicReview;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
+    }
+
+    public String getContentReview() {
+        return contentReview;
+    }
+
+    public void setContentReview(String contentReview) {
+        this.contentReview = contentReview;
+    }
+
+    public static int getCount() {
+        return count;
+    }
+
+    public static void setCount(int count) {
+        Review.count = count;
+    }
+
     public Score getScore() {
         return score;
     }
+
     public static void setOrderBy(String orderBy) {
         Review.orderBy = orderBy;
     }
+
     public static String getOrderBy() {
         return orderBy;
     }
+
     public int getAvgScore() {
         int temp = (int) (getScore().getAvg() * 10);
         return temp;
     }
-    public String getNameStore(){
-        String temp = store.getStoreName().substring(0,1);
+
+    public String getNameStore() {
+        String temp = restaurant.getResName().substring(0, 1);
         return temp;
     }
+
     public int compareTo(Object obj) {
         int result = 0;
         if (obj != null && obj instanceof Review) {
             Review r = (Review) obj;
             if (orderBy.equalsIgnoreCase("numReview")) {
 
-            } else if(orderBy.equalsIgnoreCase("score")) {
-                result = r.getAvgScore()-this.getAvgScore();
-            }else result = this.getNameStore().compareTo(r.getNameStore());
+            } else if (orderBy.equalsIgnoreCase("score")) {
+                result = r.getAvgScore() - this.getAvgScore();
+            } else {
+                result = this.getNameStore().compareTo(r.getNameStore());
+            }
         }
         return result;
     }
@@ -52,35 +124,23 @@ public class Review implements Comparable {
     public void setDelete(String delete) {
 
         if (delete.equalsIgnoreCase("YES")) {
-            this.content = null;
+            this.contentReview = null;
         } else if (delete.equalsIgnoreCase("NO")) {
-            this.content = content;
+            this.contentReview = contentReview;
         } else {
-            this.content = "Please select YES / No";
+            this.contentReview = "Please select YES / No";
         }
 
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public void setStoreName(Store store) {
-        this.store = store;
-    }
-
-    public static int getCount() {
-        return count;
     }
 
     @Override
     public String toString() {
         String output = "\n-------OUTPUT-------\n"
-                + "\nStore: " + store
+                + "\nStore: " + restaurant
                 + "\n________________________________________________________________________________"
                 + "\n" + user
                 + "\n" + score
-                + "\n" + content
+                + "\n" + contentReview
                 + "\n________________________________________________________________________________";
         return output;
     }

@@ -20,7 +20,7 @@ public class TestConnectionKin {
         ResultSet rs = stm.executeQuery();
         if (rs.next ()) {
             try {
-                c = rs.getString("fname");
+                c = rs.getString("firstName");
             } catch (SQLException ex) {
                 System.out.println(ex);
             }
