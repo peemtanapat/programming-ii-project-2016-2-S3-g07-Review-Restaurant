@@ -6,37 +6,40 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class Restaurant extends Location{
+public class Restaurant extends Location implements Comparable{
 
-    private int resId; 
+    private int resId;
     private String resName;
     private String resType; //ประเภทของร้าน ex. buffet restaurant pub bar
-    private Location location; 
     private String resTel; //เบอร์โทร
     private String resTime; //เวลาปิด-เปิดร้าน ex. 18.00 - 22.00
+    private Location location;
     private User user;
-    private Review review;
-    private static int count;
+    private Review[] review;
+    private static String orderBy = "name";
+    private static int count = 0;
 
     public Restaurant() {
     }
 
-    public Restaurant(int resId, String resName, String resType, Location location, String resTel, String resTime) {
+    public Restaurant(int resId, String resName, String resType, String resTel, String resTime, Location location, Review[] review) {
         this.resId = resId;
         this.resName = resName;
         this.resType = resType;
-        this.location = location;
         this.resTel = resTel;
         this.resTime = resTime;
+        this.location = location;
+        this.review = review;
         count++;
     }
-public static void main(String[] args) throws ClassNotFoundException, SQLException {
-         ArrayList<Restaurant> allRestaurant = Restaurant.showAllRestaurant();
-         for (int i = 0; i < allRestaurant.size(); i++) {
-             Restaurant r = allRestaurant.get(i);
-             System.out.println(r.getResId()+" "+r.getResName()+" "+r.getResType()+" "+r.getLocation().getNameAdd()+" "+r.getLocation());
-             System.out.println("---------------------------");
-         }
+
+    public static void main(String[] args) throws ClassNotFoundException, SQLException {
+        ArrayList<Restaurant> allRestaurant = Restaurant.showAllRestaurant();
+        for (int i = 0; i < allRestaurant.size(); i++) {
+            Restaurant r = allRestaurant.get(i);
+            System.out.println(r.getResId() + " " + r.getResName() + " " + r.getResType() + " " + r.getLocation().getNameAdd());
+            System.out.println("---------------------------");
+        }
     }
     public static ArrayList showAllRestaurant() throws ClassNotFoundException, SQLException {
         ArrayList<Restaurant> allRestaurant = new ArrayList();
@@ -51,12 +54,12 @@ public static void main(String[] args) throws ClassNotFoundException, SQLExcepti
         }
         return allRestaurant;
     }
-  public static ArrayList findStore(int resId) throws SQLException, ClassNotFoundException{
+    public static ArrayList findStore(int resId) throws SQLException, ClassNotFoundException {
         ArrayList<Restaurant> restaurant = new ArrayList();
         Connection con = ConnectionBuilder.getConnection();
         String sqlCmd = "SELECT r.resId, r.resName FROM Restaurant r JOIN Review re ON r.reviewId = re.reviewId WHERE r.resId = ?";
         PreparedStatement stm = con.prepareStatement(sqlCmd);
-        stm.setInt(1,resId);
+        stm.setInt(1, resId);
         ResultSet rs = stm.executeQuery();
         while (rs.next()) {
             Restaurant r = new Restaurant();
@@ -81,6 +84,47 @@ public static void main(String[] args) throws ClassNotFoundException, SQLExcepti
         r.setProvince(rs.getString("province"));
         r.setPostCode(rs.getInt("postCode"));
         return r;
+    }
+
+    public Review[] getReview() {
+        return review;
+    }
+
+    public void setReview(Review[] review) {
+        this.review = review;
+    }
+
+    public int getNumReview() {
+        return review.length;
+    }
+//    public int getReviewScore() {
+//        return getReview().getAvgScore();
+//    }
+
+//    public int getAvgScore() {
+//        int temp = (int) (getReviewScore().getAvg() * 10);
+//        return temp;
+//    }
+
+    public String getNameStore() {
+        String temp = getResName().substring(0, 1);
+        return temp;
+    }
+
+    public int compareTo(Object obj) {
+        int result = 0;
+        if (obj != null && obj instanceof Restaurant) {
+            Restaurant r = (Restaurant) obj;
+            if (orderBy.equalsIgnoreCase("numReview")) {
+                result = r.getNumReview() - this.getNumReview();
+            } else if (orderBy.equalsIgnoreCase("score")) {
+//                result = r.getAvgScore() - this.getAvgScore();
+            } else {
+//                result = this.getNameStore().compareTo(r.getNameStore());
+                result = this.getResName().compareTo(r.getResName());
+            }
+        }
+        return result;
     }
 
     public int getResId() {
