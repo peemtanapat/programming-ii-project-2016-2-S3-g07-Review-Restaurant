@@ -1,0 +1,82 @@
+drop table Restaurant;
+drop table Imgs;
+drop table Comment;
+drop table Review;
+drop table Users;
+
+create table Users(
+    user_id varchar (20),
+    password varchar (30),
+    firstName varchar(20),
+    lastName varchar(50),
+    comment_id numeric(10),
+    review_id numeric(10),
+    Primary Key(user_id)
+);
+
+create table Review(
+    review_id numeric (10),
+    topicReview varchar(100),
+    contentReview varchar (500),
+    taste numeric (1),
+    clean numeric (1),
+    service numeric (1),
+    look numeric (1),
+    worth numeric (1),
+    reviewDate date,
+    user_id varchar (20),
+    res_id numeric (6),
+    Primary Key (review_id),
+    Foreign Key (user_id) References Users(user_id)
+);
+create table Comment(
+    comment_id numeric (10),
+    contentComm varchar (500),
+    user_id varchar (20),
+    review_id numeric(10),
+    Primary Key (comment_id),
+    Foreign Key (user_id) References Users(user_id),
+    Foreign Key (review_id) References Review(review_id)
+);
+create table Imgs(
+    img_id numeric (10),
+    imgUrl varchar (200),    
+    review_id numeric (10),
+    Primary Key (img_id),
+    Foreign Key (review_id) References Review(review_id)
+);
+create table Restaurant(
+    res_id numeric(10),
+    user_id varchar (20),
+    review_id numeric (10),
+    resName varchar (50),
+    resType varchar(50),
+    resAdd varchar(100),
+    resNo varchar(10),
+    road varchar(50),
+    subDistrict varchar(50),
+    district varchar(50),
+    province varchar(30),
+    postCode numeric(5),
+    resTel varchar(50),
+    resTime varchar(12), 
+    Primary key (res_id),
+    Foreign Key (review_id) References Review(review_id),
+    Foreign Key (user_id) References Users(user_id)
+);
+
+
+INSERT INTO Users(user_id,password,firstName,lastName) VALUES ('tnp128','admin','Tanapat','Choochot');
+INSERT INTO Users(user_id,password,firstName,lastName) VALUES ('nat126','admin','Nattakit','Sriyod');
+INSERT INTO Users(user_id,password,firstName,lastName) VALUES ('mixer123','admin','Songwit','Buddee');
+INSERT INTO Restaurant(res_id,resName,resType,resAdd) VALUES (1001,'Bar-B-Q Plaza','Buffet','Central Rama II');
+INSERT INTO Restaurant(res_id,resName,resType,resAdd) VALUES (1002,'Shabushi','Buffet','Central Rama II');
+INSERT INTO Restaurant(res_id,resName,resType,resAdd) VALUES (1003,'Kaomunkhai soy 45','Restaurant','Prachautid 45');
+INSERT INTO Restaurant(res_id,resName,resType,resAdd) VALUES (1004,'Par 4 khon','Restaurant','LarnMhai');
+INSERT INTO Restaurant(res_id,resName,resType,resAdd) VALUES (1005,'MK','Restaurant','Central Rama II');
+INSERT INTO Restaurant(res_id,resName,resType,resAdd) VALUES (1006,'Yayoai','Restaurant','Central Rama II');
+INSERT INTO Restaurant(res_id,resName,resType,resAdd) VALUES (1007,'45 Statin','Restaurant','Puttabucha 45');
+INSERT INTO Restaurant(res_id,resName,resType,resAdd) VALUES (1008,'Sea Secret Seafood Buffet','Buffet','Prachautid 32');
+INSERT INTO Restaurant(res_id,resName,resType,resAdd) VALUES (1009,'Kritsada Steak House','Restaurant','Prachautid');
+INSERT INTO Restaurant(res_id,resName,resType,resAdd) VALUES (1010,'Shabu nangnai','Buffet','Prachautid 45 Larnpoon');
+INSERT INTO Restaurant(res_id,resName,resType,resAdd) VALUES (1011,'Pangkalok','bakery','Prachautid 45');
