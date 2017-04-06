@@ -8,11 +8,9 @@ import project_review.Restaurant;
 
 public class Test_AddStore_Conncection {
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-//        (int resId,String userName,String resName,String resType
-//                ,String resAdd,String resNo,String road,String subDistrict,String district,String province
-//                ,int postCode,String resTel,String resTime) 
-        Scanner sc = new Scanner(System.in);
-        System.out.println("-------Create Restaurant-------");
+
+//        Scanner sc = new Scanner(System.in);
+//        System.out.println("-------Create Restaurant-------");
 //        System.out.print("Username(Writer): ");
 //        String user = sc.nextLine();
 //        System.out.print("Restaurant ID: ");
@@ -42,7 +40,7 @@ public class Test_AddStore_Conncection {
 //        String resTel = sc.nextLine();
 //        System.out.print("Time(eq. 18.00-23.00): ");
 //        String resTime = sc.nextLine();
-            int id = 99;
+            int id = 98;
             String user = "tanapat128";
 //            String name = "ป้าปุ้ยก๋วยเตี๋ยว";
             String name = "GGG";
