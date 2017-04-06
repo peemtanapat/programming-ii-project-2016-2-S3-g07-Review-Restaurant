@@ -48,7 +48,7 @@ public class Restaurant extends User implements Comparable {
                 ,int postCode,String resTel,String resTime) 
                 throws ClassNotFoundException, SQLException{
         ArrayList<Restaurant> allRestaurant = new ArrayList();
-        Connection con = ConnectionBuilder2.getConnection();
+        Connection con = ConnectionBuilder.getConnection();
         String sqlCmd = "INSERT INTO Restaurant VALUES (?,'?','?','?','?','?','?','?','?','?',?,'?','?')";
         PreparedStatement stm = con.prepareStatement(sqlCmd);
         stm.setInt(1, resId);
@@ -75,7 +75,7 @@ public class Restaurant extends User implements Comparable {
     }
     public static ArrayList showAllRestaurant() throws ClassNotFoundException, SQLException {
         ArrayList<Restaurant> allRestaurant = new ArrayList();
-        Connection con = ConnectionBuilder2.getConnection();
+        Connection con = ConnectionBuilder.getConnection();
         String sqlCmd = "SELECT * FROM Restaurant";
         PreparedStatement stm = con.prepareStatement(sqlCmd);
         ResultSet rs = stm.executeQuery();
@@ -89,7 +89,7 @@ public class Restaurant extends User implements Comparable {
 
     public static ArrayList findStoreByName(String resName) throws SQLException, ClassNotFoundException {
         ArrayList<Restaurant> restaurant = new ArrayList();
-        Connection con = ConnectionBuilder2.getConnection();
+        Connection con = ConnectionBuilder.getConnection();
 //        String sqlCmd = "SELECT r.resId, r.resName FROM Restaurant r JOIN Review re ON r.reviewId = re.reviewId WHERE r.resId = ?";
         String sqlCmd = "SELECT * FROM Restaurant r WHERE r.resname like ?";
         PreparedStatement stm = con.prepareStatement(sqlCmd);
@@ -104,7 +104,7 @@ public class Restaurant extends User implements Comparable {
     }
      public static ArrayList findStoreById(int resId) throws SQLException, ClassNotFoundException {
         ArrayList<Restaurant> restaurant = new ArrayList();
-        Connection con = ConnectionBuilder2.getConnection();
+        Connection con = ConnectionBuilder.getConnection();
 //        String sqlCmd = "SELECT r.resId, r.resName FROM Restaurant r JOIN Review re ON r.reviewId = re.reviewId WHERE r.resId = ?";
         String sqlCmd = "SELECT * FROM Restaurant r WHERE r.res_id = ?";
         PreparedStatement stm = con.prepareStatement(sqlCmd);
