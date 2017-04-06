@@ -17,7 +17,7 @@ public class Review extends Score implements Comparable {
     //private Restaurant restaurant;
     private String contentReview;
     private Score score;
-    private Date date;
+    private static Date date;
     private static int count;
     private static String orderBy = "name";
 
@@ -30,33 +30,18 @@ public class Review extends Score implements Comparable {
         this.score = score;
     }
 
-//    public Review(User user, Restaurant store, Score score, String contentReview) {
-//        this.user = user;
-//        this.restaurant = store;
-//        this.score = score;
-//        this.contentReview = contentReview;
-//        count++;
-//    }
+
     public String getAllString() {
         return getReviewId() + " " + getUserName() + " " + getResId() + " " + getTopicReview() + ", " + getContentReview() + ", " + getScore() + ", " + getDate();
     }
 
-    public static ArrayList reviewRes(int reId, String user, int resId, String top, String content, int taste, int clean, int service, int look, int worth,Date date) throws SQLException, ClassNotFoundException {
+    public static ArrayList reviewRes(int reId, String user, int resId, String top, String content, 
+            int taste, int clean, int service, int look, int worth) throws SQLException, ClassNotFoundException {
         ArrayList<Review> review = new ArrayList();
         Connection con = ConnectionBuilder.getConnection();
 //        String sqlCmd = "SELECT r.resId, r.resName FROM Restaurant r JOIN Review re ON r.reviewId = re.reviewId WHERE r.resId = ?";
-        String sqlCmd = "INSERT INTO Review VALUES (?,'?',?,'?','?',?,?,?,?,?,?) ";
-//1        review_id numeric (10),
-//2        username varchar (20),
-//3        res_id numeric (6),
-//4        topicReview varchar(100),
-//5        contentReview varchar (500),
-//6       taste numeric (1),
-//7        clean numeric (1),
-//8        service numeric (1),
-//9        look numeric (1),
-//10        worth numeric (1),
-//        reviewDate date,
+        String sqlCmd = "INSERT INTO Review VALUES (?,?,?,?,?,?,?,?,?,?,?) ";
+
         PreparedStatement stm = con.prepareStatement(sqlCmd);
         stm.setInt(1, reId);
         stm.setString(2, user);
@@ -67,16 +52,11 @@ public class Review extends Score implements Comparable {
         stm.setInt(7, clean);
         stm.setInt(8, service);
         stm.setInt(9, look);
-        stm.setInt(10, worth);
-//        java.sql.Date date = getCurrentDatetime();
-//        stm.setDate(11, 2017-04-06);
-        stm.setDate(11, date);
-        ResultSet rs = stm.executeQuery();
-        while (rs.next()) {
-            Review rev = new Review();
-            Review.orm(rev, rs);
-            review.add(rev);
-        }
+        stm.setInt(10, worth);     
+        stm.setDate(11, java.sql.Date.valueOf("2017-04-07"));
+ 
+        stm.executeUpdate();
+   
         return review;
     }
 
