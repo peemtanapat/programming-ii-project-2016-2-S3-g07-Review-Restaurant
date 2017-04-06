@@ -4,12 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 public class Restaurant extends User implements Comparable {
 
     private static int resId=0;
-    private String userId;
+    private String userName;
     private String resName; //ชื่อร้าน
     private String resType; //ประเภทของร้าน ex. buffet restaurant pub bar
     private String resTel; //เบอร์โทร
@@ -49,7 +50,8 @@ public class Restaurant extends User implements Comparable {
                 throws ClassNotFoundException, SQLException{
         ArrayList<Restaurant> allRestaurant = new ArrayList();
         Connection con = ConnectionBuilder.getConnection();
-        String sqlCmd = "INSERT INTO Restaurant VALUES (?,'?','?','?','?','?','?','?','?','?',?,'?','?')";
+        Statement statement = con.createStatement();
+        String sqlCmd = "INSERT INTO Restaurant VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement stm = con.prepareStatement(sqlCmd);
         stm.setInt(1, resId);
         stm.setString(2, userName); 
@@ -64,12 +66,8 @@ public class Restaurant extends User implements Comparable {
         stm.setInt(11, postCode);
         stm.setString(12, resTel);
         stm.setString(13, resTime);
-        ResultSet rs = stm.executeQuery();
-        while (rs.next()) {
-            Restaurant r = new Restaurant();
-            Restaurant.orm(r, rs);
-            allRestaurant.add(r);
-        }
+        
+        stm.executeUpdate();
         
         return allRestaurant;
     }
@@ -124,6 +122,7 @@ public class Restaurant extends User implements Comparable {
     private static Restaurant orm(Restaurant r, ResultSet rs) throws SQLException {
         //--------------Restaurant-----------------
         r.setResId(rs.getInt("res_id"));
+        r.setUserName(rs.getString("userName"));
         r.setResName(rs.getString("resName"));
         r.setResType(rs.getString("resType"));
         r.setResTel(rs.getString("resTel"));
@@ -177,6 +176,14 @@ public class Restaurant extends User implements Comparable {
             }
         }
         return result;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public int getResId() {
