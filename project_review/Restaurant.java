@@ -41,49 +41,7 @@ public class Restaurant extends User implements Comparable {
         this.review = review;
         count++;
     }
-    public static ArrayList review
-        (int resId,String userName,String resName,String resType
-                ,String resAdd,String resNo,String road,String subDistrict,String district,String province
-                ,int postCode,String resTel,String resTime) 
-                throws ClassNotFoundException, SQLException{
-        ArrayList<Restaurant> allRestaurant = new ArrayList();
-        Connection con = ConnectionBuilder2.getConnection();
-        String sqlCmd = "INSERT INTO Review VALUES (?,'?','?','?','?','?','?','?','?','?',?,'?','?')";
-        PreparedStatement stm = con.prepareStatement(sqlCmd);
-        stm.setInt(1, resId);
-        stm.setString(2, userName); 
-//        r.setResName(rs.getString("resName"));
-//        r.setResType(rs.getString("resType"));
-//        r.setResTel(rs.getString("resTel"));
-//        r.setResTime(rs.getString("resTime"));
-//        //--------------Location-------------------
-//        r.setNameAdd(rs.getString("resAdd"));
-//        r.setNoRes(rs.getString("resNo"));
-//        r.setRoad(rs.getString("road"));
-//        r.setSubDistrict(rs.getString("subDistrict"));
-//        r.setDistrict(rs.getString("district"));
-//        r.setProvince(rs.getString("province"));
-//        r.setPostCode(rs.getInt("postCode"));
-        stm.setString(3, resName);
-        stm.setString(4, resType);
-        stm.setString(5, resAdd);
-        stm.setString(6, resNo);
-        stm.setString(7, road);
-        stm.setString(8, subDistrict);
-        stm.setString(9, district);
-        stm.setString(10, province);
-        stm.setInt(11, postCode);
-        stm.setString(12, resTel);
-        stm.setString(13, resTime);
-        ResultSet rs = stm.executeQuery();
-        while (rs.next()) {
-            Restaurant r = new Restaurant();
-            Restaurant.orm(r, rs);
-            allRestaurant.add(r);
-        }
-        
-        return allRestaurant;
-    }
+
     public static ArrayList addRestaurant
         (int resId,String userName,String resName,String resType
                 ,String resAdd,String resNo,String road,String subDistrict,String district,String province
