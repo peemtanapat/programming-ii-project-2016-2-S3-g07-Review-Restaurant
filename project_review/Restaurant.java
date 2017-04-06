@@ -87,7 +87,7 @@ public class Restaurant extends User implements Comparable {
         return allRestaurant;
     }
 
-    public static ArrayList findStoreName(String resName) throws SQLException, ClassNotFoundException {
+    public static ArrayList findStoreByName(String resName) throws SQLException, ClassNotFoundException {
         ArrayList<Restaurant> restaurant = new ArrayList();
         Connection con = ConnectionBuilder2.getConnection();
 //        String sqlCmd = "SELECT r.resId, r.resName FROM Restaurant r JOIN Review re ON r.reviewId = re.reviewId WHERE r.resId = ?";
@@ -102,7 +102,7 @@ public class Restaurant extends User implements Comparable {
         }
         return restaurant;
     }
-     public static ArrayList findStore(int resId) throws SQLException, ClassNotFoundException {
+     public static ArrayList findStoreById(int resId) throws SQLException, ClassNotFoundException {
         ArrayList<Restaurant> restaurant = new ArrayList();
         Connection con = ConnectionBuilder2.getConnection();
 //        String sqlCmd = "SELECT r.resId, r.resName FROM Restaurant r JOIN Review re ON r.reviewId = re.reviewId WHERE r.resId = ?";
