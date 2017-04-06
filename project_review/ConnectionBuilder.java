@@ -19,7 +19,7 @@ public class ConnectionBuilder {
     public static Connection getConnection() throws ClassNotFoundException {
         Connection con = null;
         try {
-            con = DriverManager.getConnection("jdbc:derby://localhost:1527/reviewdb", "", "");
+            con = DriverManager.getConnection("jdbc:derby://localhost:1527/ReviewDBRoot","app","app");
         } catch (SQLException ex) {
             System.out.println("2 "+ex);
         }
