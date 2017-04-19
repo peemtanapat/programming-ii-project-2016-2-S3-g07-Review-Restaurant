@@ -30,6 +30,8 @@ public class Home extends JFrame implements ActionListener {   //อย่าล
 //แถว 3    
     private JTable table;
     private JScrollPane scrollPane;
+//แถว 4
+    private JButton btnReview;
 
     public Home() {
 //          jfSearch = new JFrame("Search Restaurants");
@@ -63,6 +65,7 @@ public class Home extends JFrame implements ActionListener {   //อย่าล
 //        comboCate.setBounds(113, 76, 107, 20);
         comboCate = comboCate();
 
+        btnReview = new JButton("ReviewHere");
 //jp1   
         JPanel jp1 = new JPanel(new GridLayout(1, 1));
 //        jp1.setLayout(new FlowLayout());
@@ -78,14 +81,17 @@ public class Home extends JFrame implements ActionListener {   //อย่าล
         jpAll.add(jp1, BorderLayout.EAST);
         jpAll.add(jp2, BorderLayout.WEST);
         jpAll.add(jp3, BorderLayout.SOUTH);
+        jpAll.add(btnReview, BorderLayout.CENTER);
 //        add(jp1,BorderLayout.WEST);
 //        add(jp2);
 //        add(jp3,BorderLayout.SOUTH);
         add(jpAll);
+        setLayout(new FlowLayout());
         showTable();
         btnSearch.addActionListener(this);
         btnNew.addActionListener(this);
         comboCate.addActionListener(this);
+        btnReview.addActionListener(this);
 
     }
 
@@ -99,6 +105,17 @@ public class Home extends JFrame implements ActionListener {   //อย่าล
             java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
                     new Create().setVisible(true);
+                }
+            });
+            //categories
+        }
+        if (e.getSource() == btnReview) {
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    ReviewGUI review = new ReviewGUI();
+                    review.setSize(400, 340);
+                    review.setLocationRelativeTo(null);
+                    review.setVisible(true);
                 }
             });
             //categories
@@ -131,7 +148,7 @@ public class Home extends JFrame implements ActionListener {   //อย่าล
         comboBoxModel.addElement("บุฟเฟต์");
         comboBoxModel.addElement("กาแฟ&เบเกอรี่");
 
-//        String[] cateString = {"Categories", "ตามสั่ง", "ภัตตาคาร", "บุฟเฟต์", "กาแฟ เบเกอรี่"};
+        String[] cateString = {"Categories", "ตามสั่ง", "ภัตตาคาร", "บุฟเฟต์", "กาแฟ เบเกอรี่"};
         comboCate = new JComboBox(comboBoxModel);
         comboCate.setSelectedIndex(0); //ตั้งค่าให้โชว์ตัวไหน
         comboCate.setBounds(113, 76, 107, 20);
@@ -162,7 +179,7 @@ public class Home extends JFrame implements ActionListener {   //อย่าล
 //            String sql = "SELECT * FROM Restaurant WHERE resName LIKE '%" + txtSearch.getText() + "%'";
 //            ResultSet rs = stm.executeQuery(sql);
 //            System.out.println("MODEL");
-         
+
             int row = 0;
             if (rs == null) {
                 System.out.println("!ResultSet is null");
@@ -185,18 +202,17 @@ public class Home extends JFrame implements ActionListener {   //อย่าล
             System.out.println("!" + ex.getMessage());
         } catch (ClassNotFoundException ex) {
             System.out.println("!!" + ex.getMessage());
-        } 
+        }
 
     }
 
     public static void main(String[] args) {
-        Home jfSearch = new Home();
-        jfSearch.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        jfSearch.setSize(500, 800);
-        jfSearch.setLocationRelativeTo(null);
-        jfSearch.setVisible(true);
-        jfSearch.pack();
+        Home jframe = new Home();
+        jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        jframe.setSize(500, 500);
+        jframe.setLocationRelativeTo(null);
+        jframe.setVisible(true);
+//        jframe.pack();
     }
-
 
 }
