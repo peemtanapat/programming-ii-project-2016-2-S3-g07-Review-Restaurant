@@ -15,10 +15,6 @@ import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
 import project_review.Restaurant;
 
-/**
- *
- * @author VatcharaCK
- */
 public class Home extends javax.swing.JFrame {
 
     /**
