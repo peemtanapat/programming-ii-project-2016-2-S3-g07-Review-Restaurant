@@ -63,16 +63,7 @@ INSERT INTO Users(username,password,firstName,lastName) VALUES ('tanapat128','ad
 INSERT INTO Users(username,password,firstName,lastName) VALUES ('nattakit126','admin','Nattakit','Sriyod');
 INSERT INTO Users(username,password,firstName,lastName) VALUES ('songwit141','admin','Songwit','Buddee');
 
--- res_id numeric(10),
---     username varchar (20),
---     resName varchar (200),
---     resType varchar(50),
---     resAdd varchar(100),
---     road varchar(50),
---     province varchar(30),
---     resTel varchar(50),
---     resTime varchar(12), 
--- Review.reviewRes(reId,user,resId,top,con,taste,clean,service,look,worth);
+
 INSERT INTO Restaurant VALUES (1,'tanapat128','เจ๊จิ๋ม','ตามสั่ง','ข้างมหาลัยเทคโนฯ','พุทธบูชา','กรุงเทพฯ','088-451-5663','8.00 - 19.00');			
 INSERT INTO Restaurant VALUES (2,'tanapat128','Bar-B-Q Plaza','บุฟเฟ่ต์','Central Rama II','พระราม 2','กรุงเทพฯ','02-872-4227','11:00-21:00');			
 INSERT INTO Restaurant VALUES (3,'songwit141','Shabushi','บุฟเฟ่ต์','Central Rama II','พระราม 2','กรุงเทพฯ','02-8724483','11:00-21:00');			
