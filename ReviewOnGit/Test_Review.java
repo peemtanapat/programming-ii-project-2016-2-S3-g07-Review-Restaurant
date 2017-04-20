@@ -36,6 +36,8 @@ public class Test_Review {
         Score score = new Score(taste, clean, service, look, worth);
         System.out.print("Review write here: ");
         String content = sc.nextLine();
+        
+        //ArrayList findStore
 //        System.out.print("You want to delete comment YES/NO : ");
 //        String delete = sc.nextLine();
         //Review r1 = new Review(user, store[0], score, content);

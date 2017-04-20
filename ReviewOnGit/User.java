@@ -2,8 +2,8 @@ package project_review;
 
 public class User {
         
-    private String userId;
-    private String userName;
+    //protected String userId;
+    protected String userName;
     private String pass;
     private String firstName;
     private String lastName;
@@ -18,7 +18,7 @@ public class User {
     }
 
     public User(String userId, String userName, String pass, String firstName, String lastName) {
-        this.userId = userId;
+
         this.userName = userName;
         this.pass = pass;
         this.firstName = firstName;
