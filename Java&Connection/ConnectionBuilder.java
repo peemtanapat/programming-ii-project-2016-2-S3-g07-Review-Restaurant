@@ -14,9 +14,10 @@ import javax.sql.DataSource;
  */
 public class ConnectionBuilder {
 
-    private static org.apache.derby.jdbc.ClientDataSource ds = null;
+//    private static org.apache.derby.jdbc.ClientDataSource ds = null;
 
     public static Connection getConnection() throws ClassNotFoundException {
+        Class.forName("org.apache.derby.jdbc.ClientDriver");
         Connection con = null;
         try {
             con = DriverManager.getConnection("jdbc:derby://localhost:1527/ReviewDBRoot","app","app");
