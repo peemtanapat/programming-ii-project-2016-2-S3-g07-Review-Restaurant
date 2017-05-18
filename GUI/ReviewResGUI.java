@@ -3,14 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package myreview;
+package GUI;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import project_review.Review;
+import model.Review;
+import model.User;
+import GUI.LoginGUI;
+import java.awt.Image;
+import java.io.File;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -19,6 +26,7 @@ import project_review.Review;
 public class ReviewResGUI extends javax.swing.JFrame {
 
     HomeGUI h = null;
+    String pathimg = "";
 
     public ReviewResGUI() {
         initComponents();
@@ -55,12 +63,16 @@ public class ReviewResGUI extends javax.swing.JFrame {
         comboWorth = new javax.swing.JComboBox<>();
         jLabel14 = new javax.swing.JLabel();
         txtFldUsername = new javax.swing.JTextField();
+        img = new javax.swing.JLabel();
+        btnBrowse = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setIcon(new javax.swing.ImageIcon("D:\\Myproject\\Picture\\Untitled-1.jpg")); // NOI18N
 
         jPanel1.setBackground(new java.awt.Color(102, 153, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnCreate.setBackground(new java.awt.Color(0, 153, 0));
         btnCreate.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -73,6 +85,7 @@ public class ReviewResGUI extends javax.swing.JFrame {
                 btnCreateActionPerformed(evt);
             }
         });
+        jPanel1.add(btnCreate, new org.netbeans.lib.awtextra.AbsoluteConstraints(213, 492, 71, 47));
 
         btnBack.setIcon(new javax.swing.ImageIcon("D:\\Myproject\\Picture\\กลับ.jpg")); // NOI18N
         btnBack.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.black, java.awt.Color.black, java.awt.Color.black, java.awt.Color.black));
@@ -82,6 +95,7 @@ public class ReviewResGUI extends javax.swing.JFrame {
                 btnBackActionPerformed(evt);
             }
         });
+        jPanel1.add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 504, -1, -1));
 
         txtFldResID.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         txtFldResID.setText("Restaurant ID");
@@ -99,12 +113,15 @@ public class ReviewResGUI extends javax.swing.JFrame {
                 txtFldResIDActionPerformed(evt);
             }
         });
+        jPanel1.add(txtFldResID, new org.netbeans.lib.awtextra.AbsoluteConstraints(64, 94, 352, 40));
 
         jLabel12.setFont(new java.awt.Font("Pattaya", 0, 18)); // NOI18N
         jLabel12.setText("หัวข้อรีวิว");
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(64, 147, 120, 39));
 
         jLabel13.setFont(new java.awt.Font("Pattaya", 0, 18)); // NOI18N
         jLabel13.setText("เขียนรัวิวที่นี่");
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(64, 246, 120, 39));
 
         txtFldTopic.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         txtFldTopic.setForeground(new java.awt.Color(102, 102, 102));
@@ -123,10 +140,12 @@ public class ReviewResGUI extends javax.swing.JFrame {
                 txtFldTopicActionPerformed(evt);
             }
         });
+        jPanel1.add(txtFldTopic, new org.netbeans.lib.awtextra.AbsoluteConstraints(64, 193, 352, 40));
 
         txtFldContent.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        txtFldContent.setForeground(new java.awt.Color(204, 204, 204));
+        txtFldContent.setForeground(new java.awt.Color(51, 51, 51));
         txtFldContent.setText("comment");
+        txtFldContent.setToolTipText("");
         txtFldContent.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.lightGray, java.awt.Color.black, java.awt.Color.lightGray));
         txtFldContent.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -141,105 +160,68 @@ public class ReviewResGUI extends javax.swing.JFrame {
                 txtFldContentActionPerformed(evt);
             }
         });
+        jPanel1.add(txtFldContent, new org.netbeans.lib.awtextra.AbsoluteConstraints(64, 292, 352, 162));
 
         jPanel2.setBackground(new java.awt.Color(102, 255, 102));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         comboLook.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         comboLook.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "คะแนน", "0", "1", "2", "3", "4", "5" }));
         comboLook.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.lightGray, java.awt.Color.black, java.awt.Color.lightGray));
+        jPanel2.add(comboLook, new org.netbeans.lib.awtextra.AbsoluteConstraints(168, 200, -1, -1));
 
         jLabel7.setBackground(new java.awt.Color(0, 102, 204));
         jLabel7.setFont(new java.awt.Font("Pattaya", 0, 18)); // NOI18N
         jLabel7.setText("รสชาติ(0-5)");
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 59, 120, 39));
 
         jLabel9.setFont(new java.awt.Font("Pattaya", 0, 18)); // NOI18N
         jLabel9.setText("ความสะอาด(0-5)");
+        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 105, 120, 39));
 
         comboService.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         comboService.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "คะแนน", "0", "1", "2", "3", "4", "5" }));
         comboService.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.lightGray, java.awt.Color.black, java.awt.Color.lightGray));
+        jPanel2.add(comboService, new org.netbeans.lib.awtextra.AbsoluteConstraints(168, 156, -1, -1));
 
         comboTaste.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         comboTaste.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "คะแนน", "0", "1", "2", "3", "4", "5" }));
         comboTaste.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.lightGray, java.awt.Color.black, java.awt.Color.lightGray));
+        comboTaste.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboTasteActionPerformed(evt);
+            }
+        });
+        jPanel2.add(comboTaste, new org.netbeans.lib.awtextra.AbsoluteConstraints(168, 64, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Pattaya", 0, 18)); // NOI18N
         jLabel8.setText("การบริการ(0-5)");
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 151, 120, 39));
 
         jLabel11.setFont(new java.awt.Font("Pattaya", 0, 18)); // NOI18N
         jLabel11.setText("บรรยากาศ(0-5)");
+        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 195, 120, 39));
 
         comboClean.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         comboClean.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "คะแนน", "0", "1", "2", "3", "4", "5" }));
         comboClean.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.lightGray, java.awt.Color.black, java.awt.Color.lightGray));
+        jPanel2.add(comboClean, new org.netbeans.lib.awtextra.AbsoluteConstraints(168, 110, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Pattaya", 0, 18)); // NOI18N
         jLabel10.setText("ความคุ้มค่า(0-5)");
+        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 241, 120, 39));
 
         comboWorth.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         comboWorth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "คะแนน", "0", "1", "2", "3", "4", "5" }));
         comboWorth.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.lightGray, java.awt.Color.black, java.awt.Color.lightGray));
+        jPanel2.add(comboWorth, new org.netbeans.lib.awtextra.AbsoluteConstraints(168, 246, -1, -1));
 
         jLabel14.setFont(new java.awt.Font("Pattaya", 0, 24)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(0, 0, 153));
         jLabel14.setText("ให้คะแนนร้านค้า");
+        jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 13, 177, 39));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(36, 36, 36)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(comboClean, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(comboTaste, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(36, 36, 36)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(comboWorth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(comboService, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(comboLook, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(34, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(comboTaste))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(comboClean))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(comboService, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(5, 5, 5)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(comboLook, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(comboWorth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26))
-        );
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(492, 193, -1, -1));
 
         txtFldUsername.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         txtFldUsername.setText("username");
@@ -257,58 +239,23 @@ public class ReviewResGUI extends javax.swing.JFrame {
                 txtFldUsernameActionPerformed(evt);
             }
         });
+        jPanel1.add(txtFldUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(64, 13, 352, 40));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(64, 64, 64)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtFldTopic, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtFldContent, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtFldResID, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtFldUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(141, 141, 141)
-                        .addComponent(btnCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(56, 56, 56))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(txtFldUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(41, 41, 41)
-                        .addComponent(txtFldResID, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtFldTopic, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtFldContent, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(38, 38, 38)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(43, Short.MAX_VALUE))
-        );
+        img.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        img.setText("       image");
+        jPanel1.add(img, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 20, 180, 110));
+
+        btnBrowse.setText("Browse");
+        btnBrowse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBrowseActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnBrowse, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 140, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel2.setText("Input image here: ");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 140, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -329,13 +276,11 @@ public class ReviewResGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
-//        SucNew s = new SucNew();
-//        s.setVisible(true);
-//        this.setVisible(false);
-        JOptionPane.showMessageDialog(null,
-                "Complete");
-        System.out.println("Selected CreateButton");
 
+        JOptionPane.showMessageDialog(null,"Complete");
+        
+        System.out.println("Selected CreateButton");
+       
         String username = txtFldUsername.getText();
         int resId = Integer.parseInt(txtFldResID.getText());
         String topic = txtFldTopic.getText();
@@ -348,6 +293,7 @@ public class ReviewResGUI extends javax.swing.JFrame {
 
         try {
             ArrayList<Review> rev = Review.reviewRes(username, resId, topic, content, taste, clean, service, look, worth);
+            ArrayList<Review> img = Review.imgin(pathimg);
         } catch (SQLException ex) {
             //            Logger.getLogger(ReviewGUI.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("! SQL ReviewGUI");
@@ -454,6 +400,27 @@ public class ReviewResGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFldUsernameActionPerformed
 
+    private void comboTasteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTasteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboTasteActionPerformed
+
+    private void btnBrowseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBrowseActionPerformed
+        JFileChooser fileopen = new JFileChooser();  //AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+       fileopen.setAcceptAllFileFilterUsed(false);
+       fileopen.addChoosableFileFilter(new FileNameExtensionFilter(".jpg","jpg"));
+       fileopen.addChoosableFileFilter(new FileNameExtensionFilter(".gif","gif"));
+       fileopen.addChoosableFileFilter(new FileNameExtensionFilter(".png","png"));
+       int result = fileopen.showDialog(null,"Choose Picture");
+       if(result == JFileChooser.APPROVE_OPTION){
+           File selectfile = fileopen.getSelectedFile();
+           String path = selectfile.getAbsolutePath();
+           img.setIcon(new ImageIcon((new ImageIcon(path).getImage().getScaledInstance(120, 80,Image.SCALE_DEFAULT))));
+           pathimg = path;
+            System.out.println(pathimg);
+          
+       }
+    }//GEN-LAST:event_btnBrowseActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -492,18 +459,21 @@ public class ReviewResGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnBrowse;
     private javax.swing.JButton btnCreate;
     private javax.swing.JComboBox<String> comboClean;
     private javax.swing.JComboBox<String> comboLook;
     private javax.swing.JComboBox<String> comboService;
     private javax.swing.JComboBox<String> comboTaste;
     private javax.swing.JComboBox<String> comboWorth;
+    private javax.swing.JLabel img;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;

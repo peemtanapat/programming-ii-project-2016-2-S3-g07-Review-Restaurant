@@ -1,4 +1,4 @@
-package project_review;
+package model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -52,7 +52,23 @@ public class Review extends Score{
         int numrows = rs.getInt("NUMROWS");
         return numrows;
     }
-
+    public static Integer getNumRowImg() throws ClassNotFoundException, SQLException{
+        Connection con = ConnectionBuilder.getConnection();
+        PreparedStatement pstm = con.prepareStatement("SELECT COUNT(*) AS NUMROWS FROM IMGS");
+        ResultSet rs = pstm.executeQuery();
+        rs.next();
+        int numrows = rs.getInt("NUMROWS");
+        return numrows;
+    }
+    public static Integer getAvgScore() throws ClassNotFoundException, SQLException{
+        Connection con = ConnectionBuilder.getConnection();
+        PreparedStatement pstm = con.prepareStatement("SELECT (taste+clean+look+service+worth)/5 AS ScoreAVG FROM REVIEW"
+                + "JOIN Restaurant ON Res_Id = Review_id");
+        ResultSet rs = pstm.executeQuery();
+        rs.next();
+        int scoreAVG = rs.getInt("ScoreAVG");
+        return scoreAVG;
+    }
 //    public static void main(String[] args) throws ClassNotFoundException, SQLException {
 //        System.out.println(getNumRow());
 //    }
@@ -85,6 +101,24 @@ public class Review extends Score{
    
         return review;
     }
+    public static ArrayList imgin(String img) throws ClassNotFoundException, SQLException{
+        ArrayList<Review> imgz = new ArrayList();
+        Connection con = ConnectionBuilder.getConnection();
+        int numRows = getNumRowImg();
+        numRows=numRows+1;
+        
+      
+//        String sqlCmd = "SELECT r.resId, r.resName FROM Restaurant r JOIN Review re ON r.reviewId = re.reviewId WHERE r.resId = ?";
+        String sqlCmd = "INSERT INTO IMGS VALUES (?,?,?) ";
+
+        PreparedStatement stm = con.prepareStatement(sqlCmd);
+        stm.setInt(1, numRows);
+        stm.setString(2, img);
+        stm.setInt(3, numRows);
+        stm.executeUpdate();
+   
+        return imgz;
+    }
 
     public static java.sql.Date getCurrentDatetime() {
         java.util.Date today = new java.util.Date();
@@ -103,6 +137,7 @@ public class Review extends Score{
         r.setWorth(rs.getDouble("worth"));
         return r;
     }
+    
 
     public int getReviewId() {
         return reviewId;
@@ -175,10 +210,10 @@ public class Review extends Score{
         return orderBy;
     }
 
-    public int getAvgScore() {
-        int temp = (int) (getScore().getAvg() * 10);
-        return temp;
-    }
+//    public int getAvgScore() {
+//        int temp = (int) (getScore().getAvg() * 10);
+//        return temp;
+//    }
 
 //    public String getNameStore() {
 //        String temp = restaurant.getResName().substring(0, 1);
