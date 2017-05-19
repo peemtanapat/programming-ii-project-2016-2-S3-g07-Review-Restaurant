@@ -4,8 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Review extends Score{
 
@@ -18,6 +21,7 @@ public class Review extends Score{
     private static Date date;
     private static int count;
     private static String orderBy = "name";
+    private static String imageURL = "";
 //    private User user;
 //    private Restaurant restaurant;
     
@@ -73,56 +77,55 @@ public class Review extends Score{
 //        System.out.println(getNumRow());
 //    }
     
-    public static ArrayList reviewRes(String user, int resId, String top, String content, 
-            int taste, int clean, int service, int look, int worth) throws SQLException, ClassNotFoundException {
+    public static void reviewRes(String user, int resId, String top, String content, 
+            int taste, int clean, int service, int look, int worth, String imgUrl) throws SQLException, ClassNotFoundException {
         ArrayList<Review> review = new ArrayList();
         Connection con = ConnectionBuilder.getConnection();
         int numRows = getNumRow();
         numRows=numRows+1;         
 //        String sqlCmd = "SELECT r.resId, r.resName FROM Restaurant r JOIN Review re ON r.reviewId = re.reviewId WHERE r.resId = ?";
-        String sqlCmd = "INSERT INTO Review VALUES (?,?,?,?,?,?,?,?,?,?,?) ";
+        String sqlCmd = "INSERT INTO Review VALUES (?,?,?,?,?,?,?,?,?,?,?,?) ";
 
-        PreparedStatement stm = con.prepareStatement(sqlCmd);
-        stm.setInt(1, numRows);
-        stm.setString(2, user);
-        stm.setInt(3, resId);
-        stm.setString(4, top);
-        stm.setString(5, content);
-        stm.setInt(6, taste);
-        stm.setInt(7, clean);
-        stm.setInt(8, service);
-        stm.setInt(9, look);
-        stm.setInt(10, worth);
+        PreparedStatement pst = con.prepareStatement(sqlCmd);
+        pst.setInt(1, numRows);
+        pst.setString(2, user);
+        pst.setInt(3, resId);
+        pst.setString(4, top);
+        pst.setString(5, content);
+        pst.setInt(6, taste);
+        pst.setInt(7, clean);
+        pst.setInt(8, service);
+        pst.setInt(9, look);
+        pst.setInt(10, worth);
+        pst.setString(11, imgUrl);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
-        stm.setDate(11, java.sql.Date.valueOf(sdf.format(date)));
+        pst.setDate(12, java.sql.Date.valueOf(sdf.format(date)));
  
-        stm.executeUpdate();
+        pst.executeUpdate();
    
-        return review;
-    }
-    public static ArrayList imgin(String img) throws ClassNotFoundException, SQLException{
-        ArrayList<Review> imgz = new ArrayList();
-        Connection con = ConnectionBuilder.getConnection();
-        int numRows = getNumRowImg();
-        numRows=numRows+1;
         
-      
-//        String sqlCmd = "SELECT r.resId, r.resName FROM Restaurant r JOIN Review re ON r.reviewId = re.reviewId WHERE r.resId = ?";
-        String sqlCmd = "INSERT INTO IMGS VALUES (?,?,?) ";
-
-        PreparedStatement stm = con.prepareStatement(sqlCmd);
-        stm.setInt(1, numRows);
-        stm.setString(2, img);
-        stm.setInt(3, numRows);
-        stm.executeUpdate();
-   
-        return imgz;
     }
 
     public static java.sql.Date getCurrentDatetime() {
         java.util.Date today = new java.util.Date();
         return new java.sql.Date(today.getTime());
+    }
+    
+    public static String selectImageURL(String reviewid) throws SQLException{
+        try {
+            Connection con = ConnectionBuilder.getConnection();
+            String sql = "SELECT * FROM REVIEW WHERE review_id = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            int review_id = Integer.parseInt(reviewid);
+            ps.setInt(1,review_id);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next())
+                imageURL= rs.getString("IMGURL");
+        } catch (ClassNotFoundException ex) {
+            System.out.println(ex.getMessage());;
+        }
+        return imageURL;
     }
 
     private static Review orm(Review r, ResultSet rs) throws SQLException {
@@ -198,6 +201,14 @@ public class Review extends Score{
         Review.count = count;
     }
 
+    public static String getImageURL() {
+        return imageURL;
+    }
+
+    public static void setImageURL(String urlpig) {
+        Review.imageURL = imageURL;
+    }
+    
     public Score getScore() {
         return score;
     }
@@ -210,42 +221,23 @@ public class Review extends Score{
         return orderBy;
     }
 
-//    public int getAvgScore() {
-//        int temp = (int) (getScore().getAvg() * 10);
-//        return temp;
-//    }
-
-//    public String getNameStore() {
-//        String temp = restaurant.getResName().substring(0, 1);
-//        return temp;
-//    }
-//    public int compareTo(Object obj) {
-//        int result = 0;
-//        if (obj != null && obj instanceof Review) {
-//            Review r = (Review) obj;
-//            if (orderBy.equalsIgnoreCase("numReview")) {
-//
-//            } else if (orderBy.equalsIgnoreCase("score")) {
-//                result = r.getAvgScore() - this.getAvgScore();
-//            }
-//                else {
-//                result = this.getNameStore().compareTo(r.getNameStore());
-//            }
-//        }
-//        return result;
-//    }
-//
-//    public void setDelete(String delete) {
-//
-//        if (delete.equalsIgnoreCase("YES")) {
-//            this.contentReview = null;
-//        } else if (delete.equalsIgnoreCase("NO")) {
-//            this.contentReview = contentReview;
-//        } else {
-//            this.contentReview = "Please select YES / No";
-//        }
-//
-//    }
+    public static double getAvgScoreFromDB(int res_id) {
+       String sql = "SELECT (sum(taste+clean+service+look+worth)/count(res_id))/count(res_id) AS avgScore FROM REVIEW WHERE res_id=?";
+       double result=0.0;
+        try {
+            Connection conn = ConnectionBuilder.getConnection();
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setInt(1, res_id);
+            ResultSet rs = pst.executeQuery();
+            result = rs.getDouble(1);
+//            System.out.println(result);
+        } catch (ClassNotFoundException ex) {
+            System.out.println("");
+        } catch (SQLException ex) {
+            System.out.println("");    
+        }
+       return result;
+    }
 
     @Override
     public String toString() {
