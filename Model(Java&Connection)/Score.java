@@ -1,4 +1,4 @@
-package project_review;
+package model;
 
 public class Score{
 

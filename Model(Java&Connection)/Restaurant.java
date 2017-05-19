@@ -1,4 +1,4 @@
-package project_review;
+package model;
 
 import static com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabets.table;
 import java.sql.Connection;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-public class Restaurant extends User implements Comparable {
+public class Restaurant extends User {
 
     JTable table;
 //Userผู้เขียนร้าน    
@@ -32,19 +32,30 @@ public class Restaurant extends User implements Comparable {
 //    private int postCode;    //เลขไปรษณีย์
 //Other
     private static String orderBy = "name";
-    private Location location;
+
 
     public Restaurant() {
     }
 
-    public Restaurant(int resId, String resName, String resType, String resTel, String resTime, Location location) {
+    public Restaurant(int resId, String resName, String resType, String resTel, String resTime) {
         this.resId = resId;
         this.resName = resName;
         this.resType = resType;
         this.resTel = resTel;
         this.resTime = resTime;
-        this.location = location;
         count++;
+    }
+
+    public Restaurant(int resId, String userName, String resName, String resType, String resTel, String resTime, String nameAdd, String road, String province) {
+        this.resId = resId;
+        this.userName = userName;
+        this.resName = resName;
+        this.resType = resType;
+        this.resTel = resTel;
+        this.resTime = resTime;
+        this.nameAdd = nameAdd;
+        this.road = road;
+        this.province = province;
     }
 
     public static ResultSet showAllRestaurantResult() throws ClassNotFoundException, SQLException {
@@ -105,18 +116,13 @@ public class Restaurant extends User implements Comparable {
         PreparedStatement stm = con.prepareStatement(sqlCmd);
         stm.setString(1, resName + "%");
         ResultSet rs = stm.executeQuery();
-//        while (rs.next()) {
-//            Restaurant r = new Restaurant();
-//            Restaurant.orm(r, rs);
-//            restaurant.add(r);
-//        }
         return restaurant;
     }
 
-    public static ArrayList showAllRestaurant() throws ClassNotFoundException, SQLException {
+    public static ArrayList showRestaurant(String sqlCmd) throws ClassNotFoundException, SQLException {
         ArrayList<Restaurant> allRestaurant = new ArrayList();
         Connection con = ConnectionBuilder.getConnection();
-        String sqlCmd = "SELECT * FROM Restaurant";
+//        String sqlCmd = "SELECT * FROM Restaurant";
         Statement stm = con.createStatement();
         ResultSet rs = stm.executeQuery(sqlCmd);
         while (rs.next()) {
@@ -136,19 +142,97 @@ public class Restaurant extends User implements Comparable {
         return numrows;
     }
 
+    public int insertRestaurantInDB() throws ClassNotFoundException, SQLException {
+        String sql = "INSERT INTO Restaurant VALUES (?,?,?,?,?,?,?,?,?)";
+        Connection conn = null;
+        int result = -1;
+        int numRows = getNumRow();
+        numRows = numRows + 1;
+        try {
+            conn = ConnectionBuilder.getConnection();
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setInt(1, numRows);
+            pst.setString(2, userName);
+            pst.setString(3, resName);
+            pst.setString(4, resType);
+            pst.setString(5, nameAdd);
+            pst.setString(6, road);
+            pst.setString(7, province);
+            pst.setString(8, resTel);
+            pst.setString(9, resTime);
+            result = pst.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            return result;
+        }
+    }
+
+    public int updateRestaurantInDB() {
+        String sql = "UPDATE restaurant SET resname=?,restype=?,resadd=?,road=?,province=?,restel=?,restime=? WHERE res_id=?";
+        Connection conn = null;
+        int result = -1;
+        try {
+            conn = ConnectionBuilder.getConnection();
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, resName);
+            pst.setString(2, resType);
+            pst.setString(3, nameAdd);
+            pst.setString(4, road);
+            pst.setString(5, province);
+            pst.setString(6, resTel);
+            pst.setString(7, resTime);
+            pst.setInt(8, resId);
+            result = pst.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            return result;
+        }
+    }
+
+    public int deleteRestaurantInDB() {
+        String sql = "DELETE FROM restaurant WHERE res_id = ?";
+        Connection conn = null;
+        int result = -1;
+        try {
+            conn = ConnectionBuilder.getConnection();
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setInt(1, resId);
+            result = pst.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            return result;
+        }
+    }
+
     public static ArrayList addRestaurant(String userName, String resName, String resType,
             String resAdd, String road, String province,
             String resTel, String resTime)
             throws ClassNotFoundException, SQLException {
         ArrayList<Restaurant> allRestaurant = new ArrayList();
         Connection con = ConnectionBuilder.getConnection();
-        Statement statement = con.createStatement();
         String sqlCmd = "INSERT INTO Restaurant VALUES (?,?,?,?,?,?,?,?,?)";
         PreparedStatement stm = con.prepareStatement(sqlCmd);
         int numRows = getNumRow();
         numRows = numRows + 1;
-//        Statement getMaxId = con.createStatement();
-//        getMaxId.executeUpdate("SELECT MAX(resId) FROM Restaurant");
+
         stm.setInt(1, numRows);
         stm.setString(2, userName);
         stm.setString(3, resName);
@@ -228,53 +312,14 @@ public class Restaurant extends User implements Comparable {
         r.setResTime(rs.getString("resTime"));
         //--------------Location-------------------
         r.setNameAdd(rs.getString("resAdd"));
-//        r.setNoRes(rs.getString("resNo"));
         r.setRoad(rs.getString("road"));
-//        r.setSubDistrict(rs.getString("subDistrict"));
-//        r.setDistrict(rs.getString("district"));
         r.setProvince(rs.getString("province"));
-//        r.setPostCode(rs.getInt("postCode"));
         return r;
     }
-//
-//    public Review[] getReview() {
-//        return review;
-//    }
-//
-//    public void setReview(Review[] review) {
-//        this.review = review;
-//    }
-//
-//    public int getNumReview() {
-//        return review.length;
-//    }
-//    public int getReviewScore() {
-//        return getReview().getAvgScore();
-//    }
 
-//    public int getAvgScore() {
-//        int temp = (int) (getReviewScore().getAvg() * 10);
-//        return temp;
-//    }
     public String getNameStore() {
         String temp = getResName().substring(0, 1);
         return temp;
-    }
-
-    public int compareTo(Object obj) {
-        int result = 0;
-        if (obj != null && obj instanceof Restaurant) {
-            Restaurant r = (Restaurant) obj;
-            if (orderBy.equalsIgnoreCase("numReview")) {
-//                result = r.getNumReview() - this.getNumReview();
-            } else if (orderBy.equalsIgnoreCase("score")) {
-//                result = r.getAvgScore() - this.getAvgScore();
-            } else {
-//                result = this.getNameStore().compareTo(r.getNameStore());
-                result = this.getResName().compareTo(r.getResName());
-            }
-        }
-        return result;
     }
 
     public String getUserName() {
@@ -309,14 +354,6 @@ public class Restaurant extends User implements Comparable {
         this.resType = resType;
     }
 
-    public Location getLocation() {
-        return location;
-    }
-
-    public void setLocation(Location location) {
-        this.location = location;
-    }
-
     public String getResTel() {
         return resTel;
     }
@@ -342,13 +379,6 @@ public class Restaurant extends User implements Comparable {
         this.nameAdd = nameAdd;
     }
 
-//    public String getNoRes() {
-//        return noRes;
-//    }
-//
-//    public void setNoRes(String noRes) {
-//        this.noRes = noRes;
-//    }
     public String getRoad() {
         return road;
     }
@@ -357,21 +387,6 @@ public class Restaurant extends User implements Comparable {
         this.road = road;
     }
 
-//    public String getSubDistrict() {
-//        return subDistrict;
-//    }
-//
-//    public void setSubDistrict(String subDistrict) {
-//        this.subDistrict = subDistrict;
-//    }
-//
-//    public String getDistrict() {
-//        return district;
-//    }
-//
-//    public void setDistrict(String district) {
-//        this.district = district;
-//    }
     public String getProvince() {
         return province;
     }
@@ -380,29 +395,14 @@ public class Restaurant extends User implements Comparable {
         this.province = province;
     }
 
-//    public int getPostCode() {
-//        return postCode;
-//    }
-//
-//    public void setPostCode(int postCode) {
-//        this.postCode = postCode;
-//    }
-//    public static void main(String[] args) throws ClassNotFoundException, SQLException {
-//        ArrayList<Restaurant> allRestaurant = Restaurant.showAllRestaurant();
-//        for (int i = 0; i < allRestaurant.size(); i++) {
-//            Restaurant r = allRestaurant.get(i);
-//            System.out.println(r.getResId() + " " + r.getResName() + " " + r.getResType()+ " ");
-//            System.out.println("---------------------------");
-//        }
-//    }
     public static int getCount() {
         return count;
     }
 
+    @Override
     public String toString() {
-        return " ชื่อร้าน: " + resName
-                + " ประเภท: " + resType
-                + "\n\tที่อยู่: " + location
-                + " เวลาเปิด-ปิด: " + resTime;
+        return "Restaurant{" + "table=" + table + ", userName=" + userName + ", resId=" + resId + ", resName=" + resName + ", resType=" + resType + ", resTel=" + resTel + ", resTime=" + resTime + ", nameAdd=" + nameAdd + ", road=" + road + ", province=" + province + '}';
     }
+
+ 
 }

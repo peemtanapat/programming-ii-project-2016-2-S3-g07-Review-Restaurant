@@ -1,4 +1,4 @@
-package project_review;
+package model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -22,7 +22,7 @@ public class ConnectionBuilder {
         try {
             con = DriverManager.getConnection("jdbc:derby://localhost:1527/ReviewDBRoot","app","app");
         } catch (SQLException ex) {
-            System.out.println("2 "+ex);
+            System.out.println("ConnectionBuilder 2 "+ex);
         }
         return con;
     }
