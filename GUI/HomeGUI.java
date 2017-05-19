@@ -37,7 +37,6 @@ public class HomeGUI extends javax.swing.JFrame {
     Object[] dataReview = new Object[0];
     Restaurant rest = new Restaurant();
     private JDialog dialog;
-    private PopUpSearchPanel popupPanel;
     TableRowSorter<DefaultTableModel> sorter;
     //-------ตัวแปร global variables---------------
     private int resIdFromTable;
@@ -144,7 +143,7 @@ public class HomeGUI extends javax.swing.JFrame {
         });
 
         combocase.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        combocase.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Categories", "Restaurant", "Buffet", "Desert", "Bakery", "Coffee" }));
+        combocase.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Categories", "ตามสั่ง", "ภัตตาคาร", "บุฟเฟต์", "ขนมหวาน", "เบเกอรี่", "กาแฟ" }));
         combocase.setToolTipText("");
         combocase.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.lightGray, java.awt.Color.black, java.awt.Color.lightGray));
         combocase.addInputMethodListener(new java.awt.event.InputMethodListener() {
@@ -268,11 +267,6 @@ public class HomeGUI extends javax.swing.JFrame {
                 tableRestMouseClicked(evt);
             }
         });
-        tableRest.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                tableRestKeyPressed(evt);
-            }
-        });
         jScrollPane1.setViewportView(tableRest);
         if (tableRest.getColumnModel().getColumnCount() > 0) {
             tableRest.getColumnModel().getColumn(0).setMinWidth(30);
@@ -317,42 +311,42 @@ public class HomeGUI extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(204, 204, 255));
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("RSU", 1, 36)); // NOI18N
         jLabel5.setText("ประเภท: ");
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("RSU", 1, 28)); // NOI18N
         jLabel6.setText("ที่อยู่: ");
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("RSU", 1, 28)); // NOI18N
         jLabel7.setText("จังหวัด:");
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("RSU", 1, 28)); // NOI18N
         jLabel8.setText("เวลาเปิด-ปิด:");
 
-        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("RSU", 1, 28)); // NOI18N
         jLabel9.setText("โทร.");
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel10.setFont(new java.awt.Font("RSU", 1, 28)); // NOI18N
         jLabel10.setText("ถนน: ");
 
         jLabel11.setText("____________________________________________________________________________");
 
-        labelType.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        labelType.setFont(new java.awt.Font("RSU", 1, 36)); // NOI18N
         labelType.setText("...");
 
-        labelAddress.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        labelAddress.setFont(new java.awt.Font("Tahoma", 1, 28)); // NOI18N
         labelAddress.setText("...");
 
-        labelRoad.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        labelRoad.setFont(new java.awt.Font("RSU", 1, 28)); // NOI18N
         labelRoad.setText("...");
 
-        labelProvince.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        labelProvince.setFont(new java.awt.Font("RSU", 1, 28)); // NOI18N
         labelProvince.setText("...");
 
-        labelTel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        labelTel.setFont(new java.awt.Font("RSU", 1, 28)); // NOI18N
         labelTel.setText("...");
 
-        labelTime.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        labelTime.setFont(new java.awt.Font("RSU", 1, 28)); // NOI18N
         labelTime.setText("...");
 
         tableReview.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -398,7 +392,7 @@ public class HomeGUI extends javax.swing.JFrame {
         }
 
         btnViewData.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        btnViewData.setText("View data");
+        btnViewData.setText("ดูข้อมูล");
         btnViewData.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnViewDataActionPerformed(evt);
@@ -410,68 +404,70 @@ public class HomeGUI extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 819, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnViewData)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel9))
-                        .addGap(12, 12, 12)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(labelTel, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
-                            .addComponent(labelAddress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel8)
-                                .addGap(29, 29, 29)
-                                .addComponent(labelTime, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(9, 9, 9)
-                                .addComponent(jLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(labelRoad, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel7)
-                                .addGap(18, 18, 18)
-                                .addComponent(labelProvince, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(labelType, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel11))
+            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel4Layout.createSequentialGroup()
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel11))
+                .addGroup(jPanel4Layout.createSequentialGroup()
+                    .addGap(29, 29, 29)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(btnViewData)
+                        .addGroup(jPanel4Layout.createSequentialGroup()
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel4Layout.createSequentialGroup()
+                                    .addComponent(jLabel5)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(labelType, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel4Layout.createSequentialGroup()
+                                    .addComponent(jLabel9)
+                                    .addGap(27, 27, 27)
+                                    .addComponent(labelTel, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel4Layout.createSequentialGroup()
+                                    .addComponent(jLabel10)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(labelRoad, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel4Layout.createSequentialGroup()
+                                    .addComponent(jLabel8)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(labelTime, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel4Layout.createSequentialGroup()
+                                    .addComponent(jLabel7)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(labelProvince, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel4Layout.createSequentialGroup()
+                                    .addComponent(jLabel6)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(labelAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(labelType))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel6)
-                        .addComponent(labelAddress))
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(labelProvince)
-                        .addComponent(jLabel7)
-                        .addComponent(labelRoad)
-                        .addComponent(jLabel10)))
-                .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(labelType)
+                    .addComponent(jLabel6)
+                    .addComponent(labelAddress))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(labelRoad)
+                    .addComponent(jLabel7)
+                    .addComponent(labelProvince))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(labelTel)
                     .addComponent(jLabel8)
                     .addComponent(labelTime))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnViewData)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -479,7 +475,7 @@ public class HomeGUI extends javax.swing.JFrame {
 
         labelRestName.setBackground(new java.awt.Color(204, 204, 204));
         labelRestName.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        labelRestName.setForeground(new java.awt.Color(255, 204, 0));
+        labelRestName.setForeground(new java.awt.Color(0, 255, 0));
         labelRestName.setText("_");
         labelRestName.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -511,30 +507,27 @@ public class HomeGUI extends javax.swing.JFrame {
                 .addComponent(labelRestName, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addComponent(btnReview3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addGap(39, 39, 39)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(34, 34, 34))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addComponent(labelScore, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addGap(22, 22, 22))
+                    .addComponent(labelScore, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(16, 16, 16)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(labelScore, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnReview3)
-                            .addComponent(labelRestName))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnReview3)
+                        .addComponent(labelRestName)))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -548,7 +541,7 @@ public class HomeGUI extends javax.swing.JFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 822, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
@@ -563,8 +556,7 @@ public class HomeGUI extends javax.swing.JFrame {
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 531, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         pack();
@@ -610,8 +602,7 @@ public class HomeGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLogoutActionPerformed
 
     private void tableRestMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableRestMouseClicked
-        
-        //        String restId = tbRest.getValueAt(currentRow, 0).toString();
+//        String restId = tbRest.getValueAt(currentRow, 0).toString();
         clearTableRowsReview();
 //        showDataReviewRecord();
         resIdFromTable = Integer.parseInt(tableRest.getValueAt(currentRow, 0).toString());
@@ -640,12 +631,9 @@ public class HomeGUI extends javax.swing.JFrame {
         ur.setVisible(true);
     }//GEN-LAST:event_btnAdminActionPerformed
 
-    private void tableRestKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tableRestKeyPressed
-
-    }//GEN-LAST:event_tableRestKeyPressed
-
     private void txtFldSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFldSearchKeyReleased
         sorter.setRowFilter(RowFilter.regexFilter(txtFldSearch.getText()));
+        
     }//GEN-LAST:event_txtFldSearchKeyReleased
 
     private void combocaseInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_combocaseInputMethodTextChanged
@@ -657,8 +645,6 @@ public class HomeGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_combocaseCaretPositionChanged
 
     private void btnViewDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewDataActionPerformed
-//        currentRow = tableReview.getSelectedRow();
-//        labelRestName.setText(tbRest.getValueAt(currentRow, 1).toString());
         DataReview dtr = new DataReview();
         dtr.setLocationRelativeTo(null);
         dtr.setVisible(true);
@@ -669,6 +655,7 @@ public class HomeGUI extends javax.swing.JFrame {
 
         int currentRow = tableReview.getSelectedRow();
         System.out.println("currentRow: "+currentRow);
+        
         String tableColumnReviewId = (tableReview.getModel().getValueAt(currentRow, 0).toString());
         DataReview.setReview_id(tableColumnReviewId);
         System.out.println("tableColumnReviewId: "+tableColumnReviewId);
@@ -689,11 +676,6 @@ public class HomeGUI extends javax.swing.JFrame {
         double score = Double.parseDouble(tableColumnScore);
         DataReview.setScore(df.format(score));
         System.out.println("tableColumnScore: "+tableColumnScore);
-
-//        String imageURL = Review.selectImageURL(tableColumnReviewId);
-  
-//        Review.setImageURL(tableClick4);
-//        System.out.println(Review.getImageURL());
 
     }//GEN-LAST:event_tableReviewMouseClicked
     private void ListActionPerformed(java.awt.event.ActionEvent evt) {
@@ -731,12 +713,10 @@ public class HomeGUI extends javax.swing.JFrame {
         } catch (SQLException ex) {
             System.out.println("" + ex.getMessage());
         }
-
-//        tbProduct.setFillsViewportHeight(true);
     }
 
     public void showDataReviewRecord() {
-//        System.out.println("showDataReviewRecord method");       
+        System.out.println("showDataReviewRecord method");       
         avgScoreFromTable = 0;
         System.out.println("55555");
         String sql = "SELECT review_id,username,topicreview,contentreview,(taste+clean+service+look+worth)/5 AS AVG_Score FROM Review WHERE res_id=?";
@@ -755,17 +735,14 @@ public class HomeGUI extends javax.swing.JFrame {
                 modelReview.setValueAt(rs.getString(2), row, 1);
                 modelReview.setValueAt(rs.getString(3), row, 2);
                 modelReview.setValueAt(rs.getString(4), row, 3);
-//modelReview.addRow(data);
                 modelReview.setValueAt(rs.getDouble(5), row, 4);
                 avgScoreFromTable += rs.getDouble(5);
                 System.out.println(avgScoreFromTable);
-//                avgScoreFromTable += rs.getDouble(3); //ทำการเก็บค่าคะแนที่ได้จาก DB   
-//                System.out.println(avgScoreFromTable);
                 row++;
             }
             System.out.println("Row: " + row);
 //            if (row == 0) {
-//
+//                
 //            }
             int rowCount = modelReview.getRowCount(); //คิดจำนวนแถวจากเมธอด getRowCount
             avgScoreFromTable = avgScoreFromTable / rowCount; //เอาคะแนนรวมที่ได้จากลูป while หารด้วยจำนวนแถว
@@ -793,13 +770,6 @@ public class HomeGUI extends javax.swing.JFrame {
         labelProvince.setText(tableRest.getValueAt(currentRow, 5).toString());
         labelTel.setText(tableRest.getValueAt(currentRow, 6).toString());
         labelTime.setText(tableRest.getValueAt(currentRow, 7).toString());
-//        panelRest.setText();
-//        txtFldRestId.setText("test");
-////        txtFldRestId.setText(rest.getResId() + "");
-//        txtFldRestName.setText(rest.getResName() + "");
-//        txtFldRestType.setText(rest.getResType() + "");
-//        txtFldRestAdd.setText(rest.getNameAdd() + "");
-
     }
 
     public void clearTableRows() {
@@ -820,7 +790,7 @@ public class HomeGUI extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-
+        /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
@@ -833,15 +803,14 @@ public class HomeGUI extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(HomeGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DataReview.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(HomeGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DataReview.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(HomeGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DataReview.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(HomeGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DataReview.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
@@ -851,9 +820,9 @@ public class HomeGUI extends javax.swing.JFrame {
                     new HomeGUI().setVisible(true);
 
                 } catch (SQLException ex) {
-                    System.out.println("run(): " + ex.getMessage());
+                    System.out.println("Home: " + ex.getMessage());
                 } catch (ClassNotFoundException ex) {
-                    System.out.println("run(): " + ex.getMessage());
+                    System.out.println("Home: " + ex.getMessage());
                 }
             }
         });

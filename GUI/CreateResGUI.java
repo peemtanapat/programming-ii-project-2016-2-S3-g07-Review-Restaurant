@@ -1,11 +1,12 @@
-package myreview;
+package GUI;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import project_review.Restaurant;
+import model.Restaurant;
+import model.User;
 
 public class CreateResGUI extends javax.swing.JFrame {
 
@@ -21,21 +22,25 @@ public class CreateResGUI extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        txtFldUsername = new javax.swing.JTextField();
         txtFldResName = new javax.swing.JTextField();
         comboResType = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         txtFldProvince = new javax.swing.JTextField();
         txtFldResAdd = new javax.swing.JTextField();
         txtFldResTel = new javax.swing.JTextField();
         txtFldResTime = new javax.swing.JTextField();
         btnCreate = new javax.swing.JButton();
-        btnBack = new javax.swing.JButton();
         txtFldRoad = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        txtFldBack = new javax.swing.JButton();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Create New Restaurant");
@@ -44,19 +49,7 @@ public class CreateResGUI extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon("D:\\Myproject\\Picture\\Untitled-1.jpg")); // NOI18N
 
-        jPanel1.setBackground(new java.awt.Color(102, 153, 255));
-
-        txtFldUsername.setText("Username");
-        txtFldUsername.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.lightGray, java.awt.Color.black, java.awt.Color.lightGray));
-        txtFldUsername.setVerifyInputWhenFocusTarget(false);
-        txtFldUsername.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                txtFldUsernameFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtFldUsernameFocusLost(evt);
-            }
-        });
+        jPanel1.setBackground(new java.awt.Color(0, 102, 102));
 
         txtFldResName.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         txtFldResName.setText("ชื่อร้านอาหาร");
@@ -79,20 +72,6 @@ public class CreateResGUI extends javax.swing.JFrame {
         comboResType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ประเภทร้านอาหาร", "Restaurant", "Buffet", "Desert", "Bakery", "Coffee" }));
         comboResType.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.lightGray, java.awt.Color.black, java.awt.Color.lightGray));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("D:\\Myproject\\Picture\\Untitled-2z.jpg")); // NOI18N
-
-        jLabel3.setIcon(new javax.swing.ImageIcon("D:\\Myproject\\Picture\\สร้าง.jpg")); // NOI18N
-        jLabel3.setText("jLabel3");
-
-        jLabel4.setIcon(new javax.swing.ImageIcon("D:\\Myproject\\Picture\\ใกล้.jpg")); // NOI18N
-        jLabel4.setText("jLabel4");
-
-        jLabel5.setIcon(new javax.swing.ImageIcon("D:\\Myproject\\Picture\\เบอ.jpg")); // NOI18N
-        jLabel5.setText("jLabel5");
-
-        jLabel6.setIcon(new javax.swing.ImageIcon("D:\\Myproject\\Picture\\เปิด.jpg")); // NOI18N
-        jLabel6.setText("jLabel6");
-
         txtFldProvince.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         txtFldResAdd.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -101,7 +80,10 @@ public class CreateResGUI extends javax.swing.JFrame {
 
         txtFldResTime.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        btnCreate.setIcon(new javax.swing.ImageIcon("D:\\Myproject\\Picture\\สร้าง2.jpg")); // NOI18N
+        btnCreate.setBackground(new java.awt.Color(255, 51, 51));
+        btnCreate.setFont(new java.awt.Font("Pattaya", 1, 20)); // NOI18N
+        btnCreate.setForeground(new java.awt.Color(255, 255, 255));
+        btnCreate.setText("สร้าง");
         btnCreate.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.black, java.awt.Color.black, java.awt.Color.black, java.awt.Color.black));
         btnCreate.setPreferredSize(new java.awt.Dimension(60, 35));
         btnCreate.addActionListener(new java.awt.event.ActionListener() {
@@ -110,99 +92,159 @@ public class CreateResGUI extends javax.swing.JFrame {
             }
         });
 
-        btnBack.setIcon(new javax.swing.ImageIcon("D:\\Myproject\\Picture\\กลับ.jpg")); // NOI18N
-        btnBack.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.black, java.awt.Color.black, java.awt.Color.black, java.awt.Color.black));
-        btnBack.setPreferredSize(new java.awt.Dimension(60, 35));
-        btnBack.addActionListener(new java.awt.event.ActionListener() {
+        txtFldRoad.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        jLabel7.setBackground(new java.awt.Color(51, 51, 255));
+        jLabel7.setFont(new java.awt.Font("Pattaya", 1, 48)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 51));
+        jLabel7.setText("สร้างร้านอาหาร");
+
+        jLabel9.setFont(new java.awt.Font("RSU", 1, 24)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("ถนน");
+
+        jLabel10.setFont(new java.awt.Font("RSU", 1, 24)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("จังหวัด");
+
+        jLabel11.setFont(new java.awt.Font("RSU", 1, 24)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("สถานที่สำคัญ");
+
+        jLabel12.setFont(new java.awt.Font("RSU", 1, 24)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("โทร.");
+
+        jLabel13.setFont(new java.awt.Font("RSU", 1, 24)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setText("เวลาเปิด-ปิด");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 800, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        txtFldBack.setFont(new java.awt.Font("Pattaya", 1, 20)); // NOI18N
+        txtFldBack.setText("กลับ");
+        txtFldBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBackActionPerformed(evt);
+                txtFldBackActionPerformed(evt);
             }
         });
 
-        txtFldRoad.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel14.setFont(new java.awt.Font("RSU", 1, 24)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setText("ชื่อร้าน");
+
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("ตัวอย่าง 8.00-16.00");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(53, 53, 53)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(txtFldBack)
+                .addGap(208, 208, 208)
+                .addComponent(btnCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(83, 83, 83)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(115, 115, 115)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(comboResType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtFldResName, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtFldUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(jLabel14)
+                        .addGap(61, 61, 61)
+                        .addComponent(txtFldResName, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtFldResTime))
+                        .addGap(187, 187, 187)
+                        .addComponent(comboResType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addGap(61, 61, 61)
+                        .addComponent(txtFldResAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addGap(145, 145, 145)
+                        .addComponent(txtFldRoad, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addGap(75, 75, 75)
+                        .addComponent(txtFldResTime, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGap(72, 72, 72)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(69, 69, 69))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(76, 76, 76)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(25, 25, 25)))
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel10))
+                        .addGap(124, 124, 124)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtFldRoad)
-                            .addComponent(txtFldResTel)
-                            .addComponent(txtFldProvince)
-                            .addComponent(txtFldResAdd))))
-                .addGap(34, 34, 34))
+                            .addComponent(txtFldProvince, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtFldResTel, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)))))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(73, 73, 73)
-                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(271, 271, 271)
-                .addComponent(btnCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(112, 112, 112)
+                .addComponent(jLabel2))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(txtFldUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(58, 58, 58)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel7)))
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtFldResName, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14))
                 .addGap(18, 18, 18)
-                .addComponent(txtFldResName, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(comboResType, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(comboResType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(jLabel11))
+                    .addComponent(txtFldResAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(jLabel9))
                     .addComponent(txtFldRoad, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
-                    .addComponent(txtFldProvince, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtFldResAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtFldResTel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtFldResTime, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(44, 44, 44)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnCreate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(82, 82, 82))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addComponent(txtFldProvince, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel10)))
+                .addGap(7, 7, 7)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtFldResTel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(txtFldResTime, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnCreate, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                        .addComponent(txtFldBack)))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -210,43 +252,42 @@ public class CreateResGUI extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 799, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtFldResNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFldResNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtFldResNameActionPerformed
-
-    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        HomeGUI h = null;
+    private void txtFldBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFldBackActionPerformed
         try {
             h = new HomeGUI();
         } catch (SQLException ex) {
-            Logger.getLogger(CreateResGUI.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(CreateResGUI.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
         }
         h.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_btnBackActionPerformed
+    }//GEN-LAST:event_txtFldBackActionPerformed
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
-        SucNew s = new SucNew();
-        s.setVisible(true);
-        this.setVisible(false);
+        //        SucNew s = new SucNew();
+        //        s.setVisible(true);
+        //        this.setVisible(false);
         System.out.println("Selected CreateButton");
-        String username = txtFldUsername.getText();
+
+        String username = LoginGUI.getUsername();
+        //        String username = txtFldUsername.getText();
         String resName = txtFldResName.getText();
         String resType = comboResType.getSelectedItem().toString();
         String resAdd = txtFldResAdd.getText();
@@ -258,20 +299,21 @@ public class CreateResGUI extends javax.swing.JFrame {
         try {
             ArrayList<Restaurant> allRestaurant = Restaurant.addRestaurant(username, resName, resType, resAdd, road, province, resTel, resTime);
         } catch (ClassNotFoundException ex) {
-            System.out.println("! ClassNotFound");
+            System.out.println("" + "! ClassNotFound");
         } catch (SQLException ex) {
-//            Logger.getLogger(NewRes.class.getName()).log(Level.SEVERE, null, ex);
+            //            Logger.getLogger(NewRes.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("!! SQL");
         }
         int conf = JOptionPane.showConfirmDialog(null, "Go to homepage?", "Confirm Dialog", 2);
+        //howConfirmDialog(Component parentComponent,Object message, String title, int optionType)
         if (conf == 0) {
-            System.out.println("You Press OK...Go to Homepage");
+            System.out.println("You Press OK...\nGo to Homepage");
             try {
                 h = new HomeGUI();
             } catch (SQLException ex) {
-                Logger.getLogger(ReviewResGUI.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("291 Home:" + ex.getMessage());
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(ReviewResGUI.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("291 Home:" + ex.getMessage());
             }
             h.setVisible(true);
             this.setVisible(false);
@@ -279,23 +321,17 @@ public class CreateResGUI extends javax.swing.JFrame {
             System.out.println("You Press Cancel...Stay this page");
         }
 
-
     }//GEN-LAST:event_btnCreateActionPerformed
 
-    private void txtFldUsernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFldUsernameFocusLost
-        if (txtFldUsername.getText().equalsIgnoreCase("")) {
-            txtFldUsername.setText("Username");
+    private void txtFldResNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFldResNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFldResNameActionPerformed
+
+    private void txtFldResNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFldResNameFocusLost
+        if (txtFldResName.getText().equalsIgnoreCase("")) {
+            txtFldResName.setText("ชื่อร้านอาหาร");
         }
-
-    }//GEN-LAST:event_txtFldUsernameFocusLost
-
-    private void txtFldUsernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFldUsernameFocusGained
-
-        if (txtFldUsername.getText().equalsIgnoreCase("Username")) {
-            txtFldUsername.setText("");
-        } else {
-        }
-    }//GEN-LAST:event_txtFldUsernameFocusGained
+    }//GEN-LAST:event_txtFldResNameFocusLost
 
     private void txtFldResNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFldResNameFocusGained
 
@@ -304,12 +340,6 @@ public class CreateResGUI extends javax.swing.JFrame {
         } else {
         }
     }//GEN-LAST:event_txtFldResNameFocusGained
-
-    private void txtFldResNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFldResNameFocusLost
-        if (txtFldResName.getText().equalsIgnoreCase("")) {
-            txtFldResName.setText("ชื่อร้านอาหาร");
-        }
-    }//GEN-LAST:event_txtFldResNameFocusLost
 
     /**
      * @param args the command line arguments
@@ -348,22 +378,26 @@ public class CreateResGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnCreate;
     private javax.swing.JComboBox<String> comboResType;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JButton txtFldBack;
     private javax.swing.JTextField txtFldProvince;
     private javax.swing.JTextField txtFldResAdd;
     private javax.swing.JTextField txtFldResName;
     private javax.swing.JTextField txtFldResTel;
     private javax.swing.JTextField txtFldResTime;
     private javax.swing.JTextField txtFldRoad;
-    private javax.swing.JTextField txtFldUsername;
     // End of variables declaration//GEN-END:variables
 }
