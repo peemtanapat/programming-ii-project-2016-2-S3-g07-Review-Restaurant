@@ -3,19 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package myreview;
+package GUI;
 
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import project_review.User;
+import model.User;
 
 /**
  *
  * @author peemtnp
  */
 public class LoginGUI extends javax.swing.JFrame {
+
+    private static String username;
+    private static int userType; //ให้ 0=admin, 1=user
 
     /**
      * Creates new form LoginGUI2
@@ -49,6 +50,7 @@ public class LoginGUI extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(102, 204, 255));
         jPanel1.setForeground(new java.awt.Color(51, 153, 255));
+        jPanel1.setPreferredSize(new java.awt.Dimension(600, 400));
 
         jLabel4.setFont(new java.awt.Font("Portmanteau", 1, 18)); // NOI18N
         jLabel4.setText("USERNAME");
@@ -59,12 +61,18 @@ public class LoginGUI extends javax.swing.JFrame {
                 txtFldUsernameFocusGained(evt);
             }
         });
+        txtFldUsername.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFldUsernameActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Portmanteau", 1, 18)); // NOI18N
         jLabel5.setText("Password");
 
         btnLogin.setFont(new java.awt.Font("Portmanteau", 1, 18)); // NOI18N
         btnLogin.setText("Login");
+        btnLogin.setEnabled(false);
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoginActionPerformed(evt);
@@ -88,9 +96,22 @@ public class LoginGUI extends javax.swing.JFrame {
                 txtFldPasswordFocusGained(evt);
             }
         });
+        txtFldPassword.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+                txtFldPasswordCaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                txtFldPasswordInputMethodTextChanged(evt);
+            }
+        });
         txtFldPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtFldPasswordActionPerformed(evt);
+            }
+        });
+        txtFldPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtFldPasswordKeyPressed(evt);
             }
         });
 
@@ -144,14 +165,14 @@ public class LoginGUI extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE))
         );
 
         pack();
@@ -161,24 +182,26 @@ public class LoginGUI extends javax.swing.JFrame {
         try {
             loginG();
         } catch (ClassNotFoundException ex) {
-            System.out.println("Login Fail" + ex);
+            System.out.println("Login Fail" + ex.getMessage());
         } catch (SQLException ex) {
-            System.out.println("Login Fail" + ex);
+            System.out.println("Login Fail" + ex.getMessage());
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
-        RegisterGUI regis = new RegisterGUI();
-        regis.setVisible(true);
+        RegisterGUI register = new RegisterGUI();
+        register.setLocationRelativeTo(null);
+        register.setVisible(true);
+        this.setVisible(false);
 
     }//GEN-LAST:event_btnRegisterActionPerformed
 
     private void txtFldPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFldPasswordActionPerformed
-
-        String txtPass = txtFldPassword.getSelectedText();
-        if (txtPass.equals("")) {
-
-        }
+//
+//        String txtPass = txtFldPassword.getSelectedText();
+//        if (txtPass.equals("")) {
+//
+//        }
     }//GEN-LAST:event_txtFldPasswordActionPerformed
 
     private void txtFldUsernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFldUsernameFocusGained
@@ -189,15 +212,61 @@ public class LoginGUI extends javax.swing.JFrame {
         txtFldPassword.setText("");
     }//GEN-LAST:event_txtFldPasswordFocusGained
 
+    private void txtFldUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFldUsernameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFldUsernameActionPerformed
+
+    private void txtFldPasswordInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_txtFldPasswordInputMethodTextChanged
+//        System.out.println("txtFldPasswordInputMethodTextChanged");
+//        usernameIn = txtFldUsername.getText();
+//        passwordIn = String.valueOf(txtFldPassword.getPassword());
+//
+//        if (usernameIn.length() >= 6 && passwordIn.length() > 4) {
+//            btnLogin.setEnabled(true);
+//        } else {
+//            System.out.println("Fault");
+//        }
+    }//GEN-LAST:event_txtFldPasswordInputMethodTextChanged
+
+    private void txtFldPasswordCaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_txtFldPasswordCaretPositionChanged
+//        System.out.println("PasswordCaretPositionChanged");
+    }//GEN-LAST:event_txtFldPasswordCaretPositionChanged
+
+    private void txtFldPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFldPasswordKeyPressed
+        
+        usernameIn = txtFldUsername.getText();
+        passwordIn = String.valueOf(txtFldPassword.getPassword());
+        System.out.println("passwordIn.length: "+passwordIn.length());
+        if (usernameIn.length() >= 6 && passwordIn.length() >= 3) {
+            btnLogin.setEnabled(true);
+        } else {
+            
+        }
+    }//GEN-LAST:event_txtFldPasswordKeyPressed
+    String usernameIn = "";
+    String passwordIn = "";
+
+//    public static String getUsername() {
+//        return "tanapat128";
+//    }
     private void loginG() throws ClassNotFoundException, SQLException {
         HomeGUI hg = null;
-        String usernameIn = txtFldUsername.getText();
-        String passwordIn = String.valueOf(txtFldPassword.getPassword());
+        usernameIn = txtFldUsername.getText();
+        passwordIn = String.valueOf(txtFldPassword.getPassword());
 
         User user = new User();
         user.LogIn(usernameIn, passwordIn);
+        try {
+            username = usernameIn;
+            userType = (user.getUserType().equals("admin")) ? 0 : 1;
+        } catch (NullPointerException ex) {
+            System.out.println("Unknown Username");
+        }
+        System.out.println("userType: " + userType);
         if (user.getUserId() == 0) {
-            System.out.println("Login fail");
+            txtFldPassword.setText("");
+            btnLogin.setEnabled(false);
+
             JOptionPane.showMessageDialog(this, "Wrong Username of Password", "Invalid", JOptionPane.WARNING_MESSAGE);
         } else {
             hg = new HomeGUI();
@@ -205,11 +274,26 @@ public class LoginGUI extends javax.swing.JFrame {
             hg.setVisible(true);
             this.setVisible(false);
         }
+        System.out.println("Username: " + usernameIn);
+
     }
 
-    /**
-     * @param args the command line arguments
-     */
+    public static String getUsername() {
+        return username;
+    }
+
+    public static void setUsername(String username) {
+        LoginGUI.username = username;
+    }
+
+    public static int getUserType() {
+        return userType;
+    }
+
+    public static void setUserType(int userType) {
+        LoginGUI.userType = userType;
+    }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -238,8 +322,9 @@ public class LoginGUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-
-                new LoginGUI().setVisible(true);
+                LoginGUI login = new LoginGUI();
+                login.setVisible(true);
+                login.setLocationRelativeTo(null);
             }
         });
     }
